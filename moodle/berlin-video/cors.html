@@ -1,0 +1,39 @@
+<html>
+<head>
+<script language="javascript">
+function test() {
+    var siteURL = document.getElementById("url").value;
+    var token = document.getElementById("token").value;
+
+    var data = {
+        "wsfunction": "moodle_webservice_get_siteinfo",
+        "wstoken": token
+    };
+    var url = siteURL + "/webservice/rest/server.php?moodlewsrestformat=json";
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            document.getElementById("response").innerHTML = xhr.responseText;
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var query = [];
+    for (var key in data) {
+        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+    }
+    xhr.send(query.join('&'));
+}
+</script>
+</head>
+<body>
+    <h1>CORS test</h1>
+    <p>URL: <input type="text" id="url" value="http://localhost/moodlebugs" size="50"></p>
+    <p>Token: <input type="text" id="token" value="25ff2572a080e1b4144553be1d4a390e" size="50"></p>
+    <input type="button" value="Test!" onclick="test();">
+    <p>Response...</p>
+    <div id="response">
+    </div>
+</body>

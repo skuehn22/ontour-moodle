@@ -1,0 +1,90 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_notetaker/view
+
+    The page to view and add notes to this notetaker instance.
+
+    Classes required for JS:
+    * None
+
+    Data attibutes required for JS:
+    * None
+
+    Context variables required for this template:
+    * intro: takes the text from the notetaker description
+    * search_html: the search input field and submit button.
+    * id: the course module id.
+    * name: the note name.
+    * images: an array of the images contained in the note.
+    * cardtext: the processed note text.
+    * tag: an array of the tags added to the note.
+    * lastmodified: the time the note was created or last modified.
+}}
+
+<div class="mod-notetaker-view">
+    <div>
+        {{{intro}}}
+    </div>
+
+    <div id="note-search" >
+        {{{search_html}}}
+    </div>
+
+    <div class="py-3 text-right">
+        <a href="{{config.wwwroot}}/mod/notetaker/addnote.php?cmid={{cmid}}" class="btn btn-primary">{{#str}} addnote, mod_notetaker {{/str}}</a>
+    </div>
+
+    <div class="card-columns">
+        {{#note}}
+        <div class="card border-secondary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{name}}</h5>
+                <p class="card-subtitle mb-2 text-muted h6">{{#str}} authoredby, mod_notetaker {{/str}} {{author}}</p>
+                <div class="d-flex flex-nowrap">
+                    {{#images}}
+                        <span style="background-image: url({{imageurl}});" class="card-thumbnail m-1">
+                        {{#lastitem}}
+                            <span class="extracount">{{extracount}}</span>
+                        {{/lastitem}}</span>
+                    {{/images}}
+                </div>
+                <p class="card-text">
+                    {{{cardtext}}}
+                </p>
+                {{#tag}}
+                    <div class="badge badge-primary card-badge"><span class="sr-only">{{#str}} cardtag, mod_notetaker {{/str}}</span>{{.}}</div>
+                {{/tag}}
+                <div class="text-right">
+                    <a href="{{config.wwwroot}}/mod/notetaker/viewnote.php?cmid={{cmid}}&note={{noteid}}" class="btn btn-outline-primary" role="button">{{#str}} view, mod_notetaker {{/str}}</a>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <small>{{#str}} lastmodified, mod_notetaker {{/str}}{{lastmodified}}</small>
+                {{#publicpost}}
+                    <span class="float-right" title="{{#str}} ispublicpost, mod_notetaker {{/str}}"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                {{/publicpost}}
+                {{^publicpost}}
+                    <span class="float-right" title="{{#str}} isnotpublicpost, mod_notetaker {{/str}}"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                {{/publicpost}}
+            </div>
+        </div>
+        {{/note}}
+    </div>
+</div>
+
+

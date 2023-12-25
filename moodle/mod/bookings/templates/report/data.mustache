@@ -1,0 +1,518 @@
+{{#error}}
+    <div class="row pt-5">
+        <div class="col-md-4">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Fehler:</strong> {{error_msg}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+{{/error}}
+{{#success}}
+    <div class="row pt-5">
+        <div class="col-md-4">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Erfolgreich:</strong> {{success_msg}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+{{/success}}
+<form action="../includes/data/update_data.php" method="get">
+    <div class="row pt-5">
+        <div class="col-md-12">
+
+
+                <input type="hidden" name="booking_id_data" id="booking_id_data" value="{{b_id}}">
+                <div class="form-group row">
+                    <label for="operator" class="col-sm-2 col-form-label"><b>Veranstalter <span style="color: red;">*</span></b></label>
+                    <div class="col-sm-2">
+                        <select id="operators" name="operators" class="form-control student-list" required>
+                            <option></option>
+                            {{{o_select}}}
+                        </select>
+                        {{{mailing}}}
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="operator_bid" class="col-sm-2 col-form-label"><b>Buchungsnummer Veranstalter <span style="color: red;">*</span></b></label>
+        <div class="col-sm-2">
+            <!--
+                            <input type="text" class="form-control student-list" id="operator_bid"  name="operator_bid" required value="{{{ext_booking_id}}}">
+                            -->
+            <input type="text" class="form-control student-list" id="operator_bid"  name="operator_bid" placeholder="Buchungsnummer Veranstalter" value="{{ext_b_id}}">
+        </div>
+    </div>
+
+    <div class="form-grouo row" style="padding-bottom: 15px;">
+        <label for="email" class="col-sm-2 col-form-label"><b>Schulname</b></label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control student-list" id="school" name="school"  placeholder="Schulname" value="{{{school}}}">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="note" class="col-sm-2 col-form-label"><b>Bemerkung</b></label>
+        <div class="col-sm-2">
+            <textarea class="form-control  student-list" id="note" name="note" rows="3">{{{note}}}</textarea>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="reminder" class="col-sm-2 col-form-label"><b>Datum Wiedervorlage</b></label>
+        <div class="col-sm-2">
+            <input type="date" class="form-control  student-list" id="reminder" name="reminder" value="{{{note_reminder}}}">
+        </div>
+    </div>
+    <div class="form-group pt-3 pb-3">
+        <hr>
+    </div>
+    <div class="form-grouo row" style="padding-bottom: 15px;">
+        <label for="email" class="col-sm-5 col-form-label" style="font-size: 20px;"><b>Buchender</b></label>
+        <div class="col-sm-3">
+
+        </div>
+    </div>
+
+    <div class="collapse show" id="collapseExample">
+        <div class="card card-body" style="padding-left: 0px;">
+
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label"><b>Buchende Person</b></label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control student-list" id="firstname" name="firstname" placeholder="Vorname" value="{{firstname}}">
+
+                </div>
+                <div class="col-sm-1">
+
+                    <input type="text" class="form-control student-list" id="lastname" name="lastname"  placeholder="Nachname" value="{{lastname}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label"><b>E-Mail Adresse</b></label>
+                <div class="col-sm-2">
+                    <input type="email" class="form-control student-list" id="email" name="email" placeholder="E-Mail" value="{{email}}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="checkbox" class="col-sm-2 col-form-label"><b>Buchender ist Veranstalter</b></label>
+                <div class="col-sm-2">
+
+                    {{#mail_case_3}}
+                        <input type="checkbox" class="form-control student-list" id="book_for_operator" name="book_for_operator" checked>
+                    {{/mail_case_3}}
+                    {{^mail_case_3}}
+                        <input type="checkbox" class="form-control student-list" id="book_for_operator" name="book_for_operator">
+                    {{/mail_case_3}}
+
+
+                </div>
+            </div>
+
+            <hr>
+            <br>
+            <div class="form-group row" style="padding-bottom: 15px;">
+                <label for="email" class="col-sm-5 col-form-label" style="font-size: 20px;"><b>Rechnungsadresse der Direktkunden</b></label>
+                <div class="col-sm-3">
+
+                </div>
+            </div>
+            <div class="form-grouo row" style="padding-bottom: 15px;">
+                <label for="org" class="col-sm-2 col-form-label"><b>Organisation</b></label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control student-list" id="org" name="org"  placeholder="Organisation" value="{{org}}">
+                </div>
+            </div>
+            <div class="form-grouo row" style="padding-bottom: 15px;">
+                <label for="email" class="col-sm-2 col-form-label"><b>Straße</b></label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control student-list" id="street" name="street"  placeholder="Straße und Hausnummer" value="{{addr}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label"><b>Ort</b></label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control student-list" id="plz" name="plz" placeholder="PLZ" value="{{zip}}">
+
+                </div>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control student-list" id="city" name="city"  placeholder="Stadt" value="{{city}}">
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label"><b>Land</b></label>
+
+                <div class="col-sm-2">
+                    <select id="country" name="country" class="form-control student-list">
+                        <option>{{co}}</option>
+                        <option>Deutschland</option>
+                        <option>Österreich</option>
+                        <option>Schweiz</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-12">
+                    <input type="submit" class="btn btn-primary" id="update_data" value="Daten speichern"/>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-group pt-3 pb-3">
+        <hr>
+        <input type="hidden" name="klasse1">
+        <input type="hidden" name="klasse2">
+        <input type="hidden" name="klasse3">
+        <input type="hidden" name="klasse4">
+        <input type="hidden" name="klasse5">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <br>
+        </div>
+    </div>
+
+</form>
+
+
+<div class="row">
+    <div class="col-2">
+        <h5>Klassen bearbeiten</h5>
+    </div>
+    <div class="col-2" style="text-align: right;">
+      <a id="new_class" style="color: #0a78d1; text-decoration: underline;">neue Klasse anlegen</a>
+      <a id="new_class_cancel" style="display:none; color: red; text-decoration: underline;">abbrechen</a>
+    </div>
+</div>
+
+<div class="v-code-generator">
+    <form id="change_class_form" method="get" action="../includes/data/change_class.php">
+    <div class="form-group row ">
+        <div class="col-sm-5">
+            <table class="table v-code-block" style="width: 600px!important">
+                <tbody>
+                {{#show_class_selector}}
+                    <tr class="class_selector_row">
+                {{/show_class_selector}}
+                {{^show_class_selector}}
+                    <tr class="class_selector_row" style="display: none;">
+                {{/show_class_selector}}
+                    <td style="border: none!important;"><label for="school_classes"><b>Klasse wählen</b></label></td>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        {{#show_class_selector}}
+
+                                    <select class="class_selector form-control student-list" id="class_selector_data" name="class_selector_data">
+                                        <option></option>
+                                        {{{option_classes}}}
+                                    </select>
+
+                        {{/show_class_selector}}
+                        {{^show_class_selector}}
+                            <div class="row pb-5 pt-3" style="display: none;">
+
+                                    <select class="class_selector form-control student-list" id="class_selector_data" name="class_selector_data">
+                                        {{{option_classes}}}
+                                    </select>
+
+                            </div>
+                        {{/show_class_selector}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: none!important;"><label for="school_classes"><b>Klassennummer</b></label></td>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        <input type="hidden" name="booking_id" id="booking_id" value="{{b_id}}">
+                        <input type="hidden" name="user_id" id="user_id" value="">
+                        <input type="hidden" name="old_class_name" id="old_class_name" value="">
+                        <input type="text" name="school_classes" id="school_classes" class="form-control student-list klassenname0" value="" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: none!important;"><label for="school_classes_film"><b>Klassenname im Film</b></label></td>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        <input type="hidden" name="old_class_name_film" id="old_class_name_film" value="">
+                        <input type="text" name="school_classes_film" id="school_classes_film" class="form-control student-list klassenname1" value="" disabled/>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td style="border: none!important;"><label for="arrival"><b>Anreise</b></label></td>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        <input  class="form-control student-list" id="arrival" min="date" name="arrival" placeholder="Anreise" type="date" required>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td style="border: none!important;"><label for="departure"><b>Abreise</b></label></td>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        <input type="date" class="form-control student-list" id="departure" name="departure" placeholder="Abreise" required>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td style="border: none!important;"><label for="students"><b>Anzahl Schüler_innen</b></label></td>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        <select id="students" name="students" class="form-control student-list">
+                            <option value="">Anzahl Schüler_innen</option>
+                            <option value="9 - 14 Schüler_innen">9 - 14 Schüler_innen</option>
+                            <option value="15 - 19 Schüler_innen">15 - 19 Schüler_innen</option>
+                            <option value="20 - 24 Schüler_innen">20 - 24 Schüler_innen</option>
+                            <option value="25 - 29 Schüler_innen">25 - 29 Schüler_innen</option>
+                            <option value="30 - 35 Schüler_innen">30 - 35 Schüler_innen</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="border: none!important;"><label for="age"><b>Anzahl Schüler_innen</b></label></td>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        <select id="age" name="age" class="form-control student-list">
+                            <option value="">Alter Schüler_innen</option>
+                            <option value="14 - 15 Jahre">14 - 15 Jahre</option>
+                            <option value="15 - 16 Jahre">15 - 16 Jahre</option>
+                            <option value="16 - 17 Jahre">16 - 17 Jahre</option>
+                            <option value="17 - 18 Jahre">17 - 18 Jahre</option>
+                            <option value="18 und älter">18 und älter</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td style="border: none!important;"><label for="z-code"><b>Z-Code</b></label></td>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        <input type="text" class="form-control student-list" id="zcode" name="zcode" placeholder="Z-Code" disabled>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="row change_class_row" style="display:none;">
+
+                                <input type="submit" class="btn btn-primary" id="change_class_btn" value="Klasse speichern"/>&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-danger del-class" style="border-radius: 6px;"  data-toggle="modal" data-target="#exampleModal">
+                                    Klasse löschen
+                                </button>
+
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-md-6">
+            <table class="table v-code-block" style="width: 600px!important">
+                <tbody>
+                    <tr>
+                        <td style="border: none!important;"><label for="z-code"><b>Lehrkraft</b></label></td>
+                        <td class="p-0 pb-3" style="border: none!important;">
+                            <input type="text" class="form-control student-list" id="teacher" name="teacher" placeholder="" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none!important;"><label for="z-code"><b>E-Mail</b></label></td>
+                        <td class="p-0 pb-3" style="border: none!important;">
+                            <input type="text" class="form-control student-list" id="teacher_email" name="teacher_email" placeholder="" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none!important;"><label for="z-code"><b>Preis</b></label></td>
+                        <td class="p-0 pb-3" style="border: none!important;">
+                            <input type="text" class="form-control student-list" id="price" name="price" placeholder="" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none!important;"><label for="z-code"><b>Bemerkung</b></label></td>
+                        <td class="p-0 pb-3" style="border: none!important;">
+                            <textarea class="form-control  student-list" id="note_teacher" name="note_teacher" rows="3"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none!important;"><label for="z-code"><b>Film produzierbar</b></label></td>
+                        <td class="p-0 pb-3" style="border: none!important;">
+                            <select id="movie"  name="movie" class="form-control student-list">
+                                <option value="2"></option>
+                                <option value="1">ja</option>
+                                <option value="3">nein</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td style="border: none!important;"><label for="departure"><b>Film verschickt am</b></label></td>
+                        <td class="p-0 pb-3" style="border: none!important;">
+                            <input type="date" class="form-control student-list" id="film_sent" name="film_sent" placeholder="Film verschickt">
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Sicher, dass du die Klasse <span class="class_span"></span> löschen möchtest?
+            </div>
+            <div class="modal-footer">
+                <form action="../includes/data/delete_class.php" method="get">
+                    <input type="hidden" name="user_delete_id" id="user_delete_id" value="">
+                    <input type="hidden" name="bid_delete_id" id="bid_delete_id" value="{{b_id}}">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="delete_class_btn" class="btn btn-danger" style="border-radius: 6px;">Ja, löschen</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#js}}
+
+
+    $( document ).ready(function() {
+
+        if({{show_class_selector}} < 1){
+            var user = $('#class_selector_data').val();
+            $('#user_id').val(user)
+            getData();
+        }
+
+    });
+
+    $( "#new_class" ).click(function() {
+
+        $('#change_class_btn').val('Klasse anlegen');
+        $('.del-class').hide();
+        $('.class_selector_row').hide();
+        $('.change_class_row').show();
+        $( "#new_class" ).hide();
+        $( "#new_class_cancel" ).show();
+
+        clearForm();
+
+        var b_id    = $('#b_id').val();
+        $('#change_class_form').attr('action', '../includes/data/new_class.php');
+
+    });
+
+    $( "#new_class_cancel" ).click(function() {
+
+        var user = $('#class_selector_data').val();
+        $('#user_delete_id').val(user);
+        $( "#new_class" ).show();
+        $( "#new_class_cancel" ).hide();
+        $('.del-class').show();
+        $('#change_class_form').attr('action', '');
+        $('.class_selector_row').show();
+        $('#change_class_btn').val('speichern');
+        $('#change_class_form').attr('action', '../includes/data/change_class.php');
+        getData();
+
+    });
+
+    $('#class_selector_data').on('change', function() {
+
+        var user = $('#class_selector_data').val();
+
+        $('#user_id').val(user)
+
+        if(user === ''){
+            clearForm();
+        }
+
+        var user = $('#class_selector_data').val();
+        $('#user_delete_id').val(user)
+
+        $('#change_class_form').attr('action', '../includes/data/change_class.php');
+
+        getData();
+
+    });
+
+
+    function getData(){
+
+    var user    = $('#class_selector_data').val();
+    var classname    = $('#class_selector_data option:selected').text();
+    var b_id    = $('#b_id').val();
+    $('.class_span').html('<b>'+classname+'</b>');
+    $('#old_class_name').val(classname)
+    $.ajax({
+
+    method: "GET",
+    url: "../includes/data/get_class_data.php",
+    dataType : "json",
+    data: { user: user, b_id: b_id, classname: classname }
+
+    })
+    .done(function( msg ) {
+
+
+            if(msg['zcode'] !== ''){
+
+
+                $('#arrival').val(msg['arr']);
+                $('#school_classes').val(classname);
+                $('#departure').val(msg['dep']);
+                $('#age').val(msg['age']);
+                $('#zcode').val(msg['zcode']);
+                $('#teacher').val(msg['teacher']);
+                $('#price').val(msg['total']);
+                $('#teacher_email').val(msg['teacher_email']);
+                $('#note_teacher').val(msg['note_teacher']);
+                $('#school_classes_film').val(msg['classname_film']);
+                $('#students').val(msg['amount']);
+                $('#movie').val(msg['movie']);
+                $('.change_class_row').show();
+                $('#film_sent').val(msg['movie_ready']);
+
+            }else{
+                $('.change_class_row').hide();
+            }
+    });
+
+    }
+
+    function clearForm(){
+
+        $('#arrival').val('');
+        $('#school_classes').val('');
+        $('#departure').val('');
+        $('#age').val('');
+        $('#students').val('');
+        $('#zcode').val('');
+        $('#school_classes_film').val('');
+        $('#teacher').val('');
+        $('#price').val('');
+         $('#teacher_email').val('');
+        $('#note_teacher').val('');
+
+    }
+
+{{/js}}

@@ -1,0 +1,277 @@
+
+<p clas="pt-5">
+    <!--<span  style="font-size: 20px; color: #565E6B!important">Schritt 2: </span>-->
+
+<!--
+    {{#saved_students}}
+        <a data-toggle="collapse" href="#deactivate-section" role="button" aria-expanded="false" aria-controls="deactivate-section"  style="font-size: 20px; color: #565E6B!important">
+            Reise abschließen
+        </a>
+    {{/saved_students}}
+    {{^saved_students}}
+        <a data-toggle="collapse" href="#deactivate-section" role="button" aria-expanded="false" aria-controls="deactivate-section" disabled="disabled"  style="font-size: 20px; color: #565E6B!important">
+            Reise abschließen
+        </a>
+    {{/saved_students}}
+-->
+
+</p>
+
+<div class="container">
+ <div class="content-section" style="width: 98%;">
+     <div class="row">
+         <div class="col-md-6">
+             <h2 class="p-0">Filtern</h2>
+
+
+
+             <form id="form_b_uid">
+                 <div class="row">
+                     <div class="col-md-5">
+                         <input id="b_uid" name="b_uid" type="text" class="form-control" placeholder="Buchungsnummer">
+                     </div>
+                     <input type="button" class="btn btn-primary" id="filter-buid" value="suchen"/>
+                 </div>
+             </form>
+
+             <form id="form_classes" style="display:none;">
+                 <div class="row">
+                     <div class="col-md-5 pt-3 classes"></div>
+                 </div>
+             </form>
+
+             <div class="row">
+                 <div class="col-md-10 pt-3 links"></div>
+             </div>
+
+         </div>
+
+         <div class="col-md-6">
+             <div class="row">
+                 <div class="col-md-12">
+                    <div class="booking-info"></div>
+                 </div>
+             </div>
+
+         </div>
+
+     </div>
+     <div class="row">
+         <div class="col-md-12">
+             <div class="overview"></div>
+         </div>
+     </div>
+ </div>
+
+</div>
+
+<!--
+<div class="collapse show" id="deactivate-section">
+    <div class="card card-body p-0">
+    <h3  class="p-0">Ihre Reise wird abgeschlossen!</h3>
+    <ul>
+        <li>Sie erhalten die Rechnung per E-Mail</li>
+        <li>Die Schüler Accounts werden deaktiviert</li>
+        <li>Die Reise wird abgeschlossen und deaktiviert</li>
+    </ul>
+
+    {{#school_classes}}
+        <p class="p-0">
+            <a class="btn btn-ontour end-trip"  style="" data-group="{{id}}">Jetzt beenden</a>
+            <input type="button" class="btn btn-back" id="save" value="zurück" onclick="history.back()" />
+        </p>
+    {{/school_classes}}
+
+    </div>
+</div>
+
+
+<div class="modal" id="sure" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sind Sie sich sicher?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <form id="data">
+                        <input type="hidden" name="course" value="{{courseid}}">
+                        <input type="hidden" name="user" value="{{userid}}">
+                        <input type="hidden" name="school_class" id="school_class" value="">
+                    </form>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary final-action">Beenden</button>
+                <button type="button" class="btn btn-secondary abort" data-dismiss="modal">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->
+{{#js}}
+
+
+
+
+    $(document).ready(function () {
+
+    function init(){
+        $( "#class-filter" ).change(function() {
+
+            var group = $(this).val();
+
+            links = "<h2 class='pt-5'>Aufgabenübersicht</h2><a target='_blank' href='https://reisen.ontour.org/mod/choice/report.php?id=144&group="+group+"'>Aufgabe 1 - Regeln</a><br>";
+            links = " <a target='_blank' href='https://reisen.ontour.org/mod/assign/view.php?id=142&action=grading&tsort=lastname&tdir=4&group="+group+"'>Aufgabe 2 - Namen (neu Aufgabe 1)</a>";
+            links += "<br><a target='_blank' href='https://reisen.ontour.org/mod/assign/view.php?id=145&action=grading&tsort=lastname&tdir=4&group="+group+"'>Aufgabe 3 - Filmproduktion</a>";
+            links += "<br><a target='_blank' href='https://reisen.ontour.org/mod/assign/view.php?id=146&action=grading&tsort=lastname&tdir=4&group="+group+"'>Aufgabe 4 - Audio (neu Aufgabe 4)</a>";
+            links += "<br><a target='_blank' href='https://reisen.ontour.org/mod/assign/view.php?id=148&action=grading&tsort=lastname&tdir=4&group="+group+"'>Aufgabe 5 - Teamfoto (neu Aufgabe 2)</a><br>";
+            links += "<a target='_blank' href='https://reisen.ontour.org/mod/feedback/analysis.php?id=151&group=0'>Aufgabe 6 - Feedback</a><br>";
+            links += "<a target='_blank' href='https://reisen.ontour.org/mod/assign/view.php?id=164&action=grading&group="+group+"'>Lehreraufgabe</a><br>";
+
+
+            links += "<br><a target='_blank' href='https://reisen.ontour.org/mod/assign/view.php?id=167&action=grading&tsort=lastname&tdir=4&group="+group+"'>neu - Videodreh Berlin (Aufgabe 3)</a>";
+            links += "<br><a target='_blank' href='https://reisen.ontour.org/mod/assign/view.php?id=168&action=grading&tsort=lastname&tdir=4&group="+group+"'>neu - Die Videosafari (Aufgabe 5)</a>";
+            links += "<br><a target='_blank' href='https://reisen.ontour.org/mod/assign/view.php?id=169&action=grading&tsort=lastname&tdir=4&group="+group+"'>neu - Outtakes (Aufgabe 6)</a><br>";
+
+
+        $(".links").html(links);
+
+        getOverview(group);
+
+
+        });
+
+    }
+
+    $('#filter-buid').click(function() {
+			filter1();
+        });
+	
+
+        $('.end-trip').click(function() {
+            var group = $(this).attr('data-group');
+            $("#school_class").val(group),
+            $("#sure").show();
+        });
+
+        $('.final-action').click(function() {
+            finalActions();
+        });
+
+        $('.close').click(function() {
+            $("#sure").hide();
+        });
+
+        $('.abort').click(function() {
+            $("#sure").hide();
+        });
+
+
+        function finalActions(){
+
+            url = "/mod/finishing/final-actions.php";
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#data").serialize(),
+            success: function(data)
+            {
+                $("#sure").hide();
+            }
+            });
+
+        }
+		
+		
+		function filter1() {
+
+            $(".links").html('');
+            $(".overview").html('');
+
+            var url = "/mod/finishing/includes/filter-booking.php";
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#form_b_uid").serialize(),
+            success: function(response)
+            {
+				if(response){
+				
+					 $(".classes").html(response);	
+					 $("#form_classes").show();
+                     getBookingInfo();
+					 init();
+					 //getBookingInfo();
+
+				}else{
+					 $("#form_classes").hide();
+				}
+				
+            }
+            });
+
+        }
+
+		function getBookingInfo(){
+
+            //var id = document.getElementById("b_uid").value;
+            var url = "/mod/finishing/includes/get-booking.php";
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#form_b_uid").serialize(),
+            success: function(response)
+            {
+				if(response){
+                    $(".booking-info").html(response);
+                }else{
+
+				}
+            }
+            });
+		}
+
+
+    function getOverview(group){
+
+    var data = [];
+
+    var url = "/mod/finishing/includes/get-overview.php";
+
+    data['group'] = group;
+
+    $.ajax({
+    type: "POST",
+    url: url,
+    data: ({group: group}),
+    success: function(response)
+    {
+    if(response){
+        $(".overview").html(response);
+    }else{
+
+    }
+    }
+    });
+    }
+
+
+    $("#form_b_uid").submit(function(e){
+            e.preventDefault();
+            filter1();
+        });
+
+
+
+    });
+
+{{/js}}
+

@@ -1,0 +1,106 @@
+<form action="../includes/change_action.php" method="get" id="form">
+    <div class="row">
+        <div class="col-4">
+            <div class="row">
+                <div class="col-4">
+                    <h4>History</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {{{crdate}}}: Buchgung angelegt
+                    <br>
+                    {{{history_data}}}
+                </div>
+            </div>
+
+            <div class="row pt-5">
+                <div class="col-12">
+                    <h4>Geplant</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                            {{{planned_data}}}
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <h4>Aktion bearbeiten / anlegen</h4>
+            <div class="row">
+                <div class="col-3">
+                    <select class="class_selector form-control student-list" id="class_selector" name="class_selector">
+                        <option>Klasse wählen</option>
+                        {{{option_classes}}}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <select class="class_selector form-control student-list" id="type_selector" name="type_selector">
+                       <option>Type wählen</option>
+                       <option value="mail_co">Z-Codes</option>
+                       <option value="mail_re">Erinnerung</option>
+                       <option value="mail_mo">Motivation</option>
+                       <option value="mail_fi">Film</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-3 date_selector">
+                    <input type="date" class="form-control student-list" id="date" min="date" name="date" placeholder="Datum">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <input type="hidden" name="b_id" value="{{{b_id}}}">
+                    <input type="hidden" name="action" id="action" value="">
+                    <input type="submit" class="btn btn-primary" id="save" value="Änderung speichern"/>
+                    <input type="button" class="btn btn-danger" id="delete" style="border-radius: 6px;" value="Action löschen"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+{{#js}}
+
+    $(document).ready(function () {
+
+
+    $( "#delete" ).click(function() {
+
+        $( "#action" ).val('delete');
+         $( "#form" ).submit();
+    });
+
+
+    $( "#type_selector" ).change(function() {
+
+
+    var b_id = $( "#b_id" ).val();
+    var type = $( "#type_selector" ).val();
+    var user = $( "#class_selector" ).val();
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "../includes/change_action.php?b_id="+b_id+"&type="+type+"&user="+user, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+
+    if (this.readyState == 4 && this.status == 200) {
+
+    const dateInput = document.getElementById('date');
+    dateInput.value = this.response;
+
+
+
+
+    }
+    };
+    xhttp.send();
+    });
+
+    });
+
+
+{{/js}}

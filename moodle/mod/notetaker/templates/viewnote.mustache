@@ -1,0 +1,50 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_notetaker/view
+
+    The page to view and add notes to this notetaker instance.
+
+    Classes required for JS:
+    * None
+
+    Data attibutes required for JS:
+    * None
+
+    Context variables required for this template:
+    * notecontent: the full content of the note.
+    * cmid: the course module id.
+    * noteid: the note id.
+}}
+
+<div class="mod_viewnote">
+    <span class="py-3 float-right">
+        <a href="{{config.wwwroot}}/mod/notetaker/view.php?id={{cmid}}" class="btn btn-light">{{#str}} backtonotes, mod_notetaker {{/str}}</a>
+    </span>
+    {{#note}}
+        <h2>{{name}}</h2>
+        <div>
+            {{{notecontent}}}
+        </div>
+    {{/note}}
+    {{#noteowner}}
+        <div class="mt-4">
+            <a title="{{#str}} edit, mod_notetaker {{/str}}" href="{{config.wwwroot}}/mod/notetaker/addnote.php?cmid={{cmid}}&note={{noteid}}"><i class="icon fa fa-edit"></i></a>
+            <a title="{{#str}} delete {{/str}}" href="?delete={{cmid}}&cmid={{cmid}}&note={{noteid}}"><i class="icon fa fa-trash"></i></a>
+        </div>
+    {{/noteowner}}
+</div>

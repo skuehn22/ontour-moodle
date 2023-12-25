@@ -1,0 +1,394 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    Page header.
+}}
+
+<link rel='stylesheet' id='wp-mediaelement-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-includes/js/mediaelement/wp-mediaelement.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-blocks-vendors-style-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-vendors-style.css?ver=6.1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-blocks-style-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style.css?ver=6.1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='Edwiser Bridge Single Sign On-public-style-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-bridge-sso/public/assets/css/sso-public-css.css?ver=1.4.0' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-includes/css/dashicons.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='edwiserbridge_font_awesome-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-bridge/public/assets/css/font-awesome-4.4.0/css/font-awesome.min.css?ver=2.1.2' type='text/css' media='all' />
+<link rel='stylesheet' id='edwiserbridge-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-bridge/public/assets/css/eb-public.css?ver=2.1.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wdmdatatablecss-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-bridge/public/assets/css/datatable.css?ver=2.1.2' type='text/css' media='all' />
+<link rel='stylesheet' id='eb-public-jquery-ui-css-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-bridge/admin/assets/css/jquery-ui.css?ver=2.1.2' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery-min-ui-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-multiple-users-course-purchase/public/css/jquery-ui.min.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery_dataTables_min-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-multiple-users-course-purchase/public/css/jquery_dataTables_min.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive_dataTables_min-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-multiple-users-course-purchase/public/css/responsive_dataTables_min.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='buttons_dataTables_min-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-multiple-users-course-purchase/public/css/buttons_dataTables_min.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='select_dataTables_min-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-multiple-users-course-purchase/public/css/select_dataTables_min.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='wdm_front_end_css-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/edwiser-multiple-users-course-purchase/public/css/edwiser-frontend-style.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='woocommerce_integration-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/woocommerce-integration/public/css/bridge-woocommerce-public.css?ver=2.1.8' type='text/css' media='all' />
+<link rel='stylesheet' id='woocommerce-layout-css'  href='http://projektreisen-wordpress.rwdotzrn9f-e92498w2k6kr.p.runcloud.link/wp-content/plugins/woocommerce/assets/css/woocommerce-layout.css?ver=5.9.0' type='text/css' media='all' />
+
+
+<div id="nav-drawer" data-region="drawer" class="d-print-none moodle-has-zindex {{^navdraweropen}}closed{{/navdraweropen}}" aria-hidden="{{#navdraweropen}}false{{/navdraweropen}}{{^navdraweropen}}true{{/navdraweropen}}" tabindex="-1">
+        {{> theme_boost/flat_navigation }}
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light nav-top fixed-top bg-light" style="height: 50px;">
+    <div class="container">
+    <a class="navbar-brand" href="https://ontour.org/">
+        {{#homepage}}
+            <img src="/pix/theme/onTour.png">
+        {{/homepage}}
+        {{^homepage}}
+            <img src="/pix/theme/onTour.png">
+        {{/homepage}}
+
+
+    </a>
+
+<!--
+         <div class="d-block d-sm-none">
+            <div data-region="drawer-toggle" class="d-inline-block mr-3">
+                <button style="color: #fff; background-color: transparent!important; border: 1px solid #fff; margin-top:10px" aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" class="btn nav-link float-sm-left mr-1 btn-secondary" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}
+                    <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
+                <span aria-hidden="true"> </span>
+                <span aria-hidden="true"> </span>
+                <span aria-hidden="true"> </span>
+                </button>
+            </div>
+         </div>
+-->
+        <!--
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        -->
+
+        <div class="d-none d-sm-flex">
+            <ul class="nav navbar-nav">
+                <li class="dropdown nav-item menu-item-143">
+                    <a href="http://ontour.org/"  role="button" aria-expanded="false">Videoprojekt</a>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="http://ontour.org/das-team/"  role="button" aria-expanded="false">Über Uns</a>
+                </li>
+            </ul>
+        </div>
+        <!--
+    <div class="d-none d-sm-flex">
+    <ul class="nav navbar-nav">
+        <li class="dropdown nav-item">
+            <a href="/static/reisen.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Die Reisen</a>
+            <ul class="dropdown-menu dropdown-cart" role="menu">
+
+                <a class="submenu-link" href="/static/ddr_reise.html" >
+                    <li>
+
+                      <span class="item submenu-row-1">
+                        <span class="item-left">
+                            <span class="item-info">
+                                  <span class="submenu-heading">Berlin (DDR)</span>
+                                  <span class="submenu-text-right">Eine interaktive Klassenfahrt<br>nach Berlin mit dem Thema DDR</span>
+                            </span>
+                        </span>
+                        <span class="item-right submenu-col-1">
+                                  <span class="submenu-heading-left">Projekttag</span><br>
+                                  <span class="submenu-text-left">ab <strong>9 €</strong> SchülerIn</span>
+                        </span>
+                    </span>
+
+                    </li>
+                </a>
+
+                <li>
+                  <span class="item submenu-row-2">
+                    <span class="item-left">
+                        <span class="item-info">
+                              <span class="submenu-heading">DDR Zeitzeuge</span>
+                              <span class="submenu-text-right">Das mitreißende und emotionale<br> Leben des Wieland Herrmann</span>
+                        </span>
+                    </span>
+                    <span class="item-right submenu-col-1">
+                              <span class="submenu-heading-left">1 Doppelstunde</span><br>
+                              <span class="submenu-text-left">ab <strong>2 €</strong> SchülerIn</span>
+                    </span>
+                </span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav">
+        <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Wie funktionert's</a>
+            <ul class="dropdown-menu dropdown-cart" role="menu" style="min-width: 680px;">
+
+                    <li>
+
+                  <span class="item">
+                       <div class="row">
+                            <div class="col-md-6 sub2-item">
+                                <a class="submenu-link" href="/static/der-ablauf.html" >
+                                <span class="item-left">
+                                    <span class="item-info">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                  <span class="submenu-heading" style="display: initial;">Der Ablauf</span>
+                                                  <span class="submenu-text-right">Die Durchführung einer Reise vom Kauf bis zum Abschluss</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                 <img src="/pix/theme/G1-Menue-Pro.png">
+                                            </div>
+                                        </div>
+                                    </span>
+                                </span>
+                                </a>
+                            </div>
+                           <div class="col-md-6 sub2-item">
+                                <a class="submenu-link" href="/static/ueber-uns.html" >
+                                 <span class="item-right" style="width: 100%;">
+                                     <span class="item-info">
+                                          <div class="row">
+                                            <div class="col-md-8">
+                                                  <span class="submenu-heading">Über Uns</span><br>
+                                                  <span class="submenu-text-right">Unsere Vision, unsere Mission, unsere Werte und unser Team</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                 <img src="/pix/theme/G2-Menue-Pro.png">
+                                            </div>
+                                        </div>
+                                    </span>
+                                </span>
+                                </a>
+                           </div>
+                       </div>
+                </span>
+
+                    </li>
+                <li>
+                  <span class="item">
+                    <div class="row">
+                            <div class="col-md-6 sub2-item">
+                                 <a class="submenu-link" href="/static/das-konzept.html" >
+                                    <span class="item-left">
+                                        <span class="item-info">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                      <span class="submenu-heading" style="display: initial;">Das Konzept</span>
+                                                      <span class="submenu-text-right">Didaktische und methodische Herangehensweise</span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                     <img src="/pix/theme/G3-Menue-Pro.png">
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </span>
+                                 </a>
+                            </div>
+                           <div class="col-md-6 sub2-item">
+                                <a class="submenu-link" href="/static/faq.html" >
+                                 <span class="item-right" style="width: 100%;">
+                                     <span class="item-info">
+                                          <div class="row">
+                                            <div class="col-md-8">
+                                                  <span class="submenu-heading">FAQs</span><br>
+                                                  <span class="submenu-text-right">Antworten auf häufig gestellt Fragen</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                 <img src="/pix/theme/G4-Menue-Pro.png">
+                                            </div>
+                                        </div>
+                                    </span>
+                                </span>
+                                </a>
+                           </div>
+                       </div>
+                </span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+-->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+
+        <div class="d-none d-sm-flex">
+	    {{{ output.navbar_plugin_output }}}
+        {{{logged_in}}}
+        {{#logged_in}}
+        {{{ output.user_menu }}}
+        {{/logged_in}}
+        {{^logged_in}}
+            <a class="login-button" href="/login/index.php" style="padding-bottom: 5px;
+    padding-top: 5px;
+    /* margin-left: -13px; */
+    margin-right: 11px; border: 2px solid #000;
+}">Login</a>
+        {{/logged_in}}
+        </div>
+
+        <!--
+    <div class="d-none d-sm-flex">
+    <ul class="nav navbar-nav navbar-right" style="position: relative;">
+        <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle phone-button" data-toggle="dropdown" role="button" aria-expanded="false" style="padding: 0 6px 0 6px;">
+                    {{#homepage}}
+                        <img class="phone-img" src="/pix/theme/Telefon-Header-weiß.png">
+                    {{/homepage}}
+                    {{^homepage}}
+                        <img class="phone-img" src="/pix/theme/Telefon-Header.png">
+                    {{/homepage}}
+                </a>
+            <ul class="dropdown-menu dropdown-cart" role="menu" style="right:0; left: auto; padding:0px; min-width: 500px;">
+                <li>
+                  <span class="item submenu-phone-row-1" style="padding: 20px 0; border-bottom: solid #aaa 1px;">
+                    <span class="item-left">
+                        <span class="item-info" style="margin:0px;">
+                            <img src="/pix/theme/Matthias-Enter-Foto.jpg" style="width:150px;">
+                        </span>
+                    </span>
+                    <span class="item-right" style="padding:0px;">
+                              <span class="submenu-heading-phone-left">Sie brauchen Hilfe?</span><br><br>
+                              <span class="submenu-text-phone-left">Rufen Sie uns gerne an:</span><br>
+                              <span class="submenu-text-phone-number-left">Tel. 030 6293 1521</span><br>
+                              <span class="submenu-text-phone-left">(Mo bis Fr: 10 - 16 Uhr)</span><br>
+                    </span>
+                </span>
+                </li>
+                <li>
+                  <span class="item submenu-phone-row-1" style="padding: 20px 0; border:0;">
+                    <span class="item-left" style="padding-left: 25px;">
+                        <a href="/static/faq.html">
+                               <button class="button submenu-button">FAQ s</button>
+                        </a>
+                    </span>
+                    <span class="item-right" style="padding:0px;">
+                        <a href="static/kontakt.html" class="button submenu-button">KONTAKTFORMULAR</a>
+                    </span>
+                </span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+    -->  <div class="d-none d-sm-flex">
+        <!--<a class="login-button" href="/login/index.php">Login</a>-->
+        <a href="https://ontour.org/kontakt/" style="padding-right: 16px;"><img loading="lazy" width="36" height="35" src="https://ontour.org/wp-content/uploads/2021/12/phone.png" alt="" title="Kontakt" class="wp-image-1446"></a>
+
+
+    </div>
+    </div>
+</nav>
+
+
+<img src="https://ontour.org/wp-content/uploads/2022/03/Titelbild-onTour.webp">
+
+    
+
+        <!-- <div class="row m-0 pb-5" style="background-color: #fff;">
+            <div class="col-md-12 pb-5">
+                <div class="row p-1" style=" border: solid #ddd 1px;">
+                    <div class="offset-md-2 col-md-6">
+                        <nav class="trip-nav">
+                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-trip-tab" data-toggle="tab" href="#nav-trip" role="tab" aria-controls="nav-trip" aria-selected="true">Die Reise</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Ablauf</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Didaktisches Konzept</a>
+                                <a class="nav-item nav-link" id="nav-faq-tab" data-toggle="tab" href="#nav-faq" role="tab" aria-controls="nav-faq" aria-selected="false">FAQs</a>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="offset-md-1 col-md-2">
+                        <button type="submit" class="btn btn-secondary btn-block trip-nav-button text-transform-none" id="bookbtn">Reise buchen</button>
+                    </div>
+                </div>
+                <div class="tab-content" id="tripContent">
+                    <div class="tab-pane fade show active" id="nav-trip" role="tabpanel" aria-labelledby="nav-trip-tab">
+                        <div class="row">
+                            <div class="offset-md-2 col-md-8">
+                                <h1>Berlin (DDR)</h1>
+                                <p class="subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        <div class="row background">
+                            <div class="col-md-12" style="padding: 80px;">
+                                <div class="row">
+                                    <div class="offset-2 col-3 trip-box bg-w">
+                                        <h3>Gesamte Reise</h3>
+                                        <p class="trip-box-sub"><span class="trip-price">8€</span> /Schüler</p>
+                                        <ul class="fa-ul">
+                                            <li class="pb-2"><span class="fa-li"><i class="fas fa-check"></i></span>6 Stunden (je 45 Minuten)</li>
+                                            <li class="pb-2"><span class="fa-li"><i class="fas fa-check"></i></span>15 - 30 Schüler</li>
+                                            <li class="pb-2"><span class="fa-li"><i class="fas fa-check"></i></span>Zusätzliches 20 Stunden Vor- & Nachbereitungs-Material</li>
+                                            <li class="pb-2"><span class="fa-li"><i class="fas fa-check"></i></span>Einzigartiges Projektergebnis</li>
+                                            <li class="pb-2"><span class="fa-li"><i class="fas fa-check"></i></span>6 Monate nutzbar</li>
+                                        </ul>
+                                        <button type="submit" class="btn btn-secondary btn-block submenu-button text-transform-none" id="loginbtn">Reise buchen</button>
+                                    </div>
+                                    <div class="col-md-5 pl-3">
+                                        <img src="http://layout.project-dev.de/pix/theme/trip.png" class="rounded" style="width: 450px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="offset-md-2 col-md-8">
+                                <h1>Viel mehr als nur eine Klassenfahrt</h1>
+                                <p class="subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="offset-md-1 col-md-3">
+                                <h3 class="text-center"><strong>Inhalt</strong></h3>
+                                <p class="trip-text-center">Die Schüler gehen auf eine emotionale, informative und interaktiven Reise in die deutsche demokratische Republik.</p>
+                                <p class="trip-text-center">Vielen tolle Sachen. Wir haben Spaß und erzählen uns Witze.</p>
+
+                            </div>
+                            <div class="col-md-3">
+                                <h3 class="text-center"><strong>Methodik & Ablauf</strong></h3>
+                                <p class="trip-text-center">Durch ein ausgeklügeltes System werden die Schüler mit Hilfe von Aufgaben, Gruppendynamiken und technischer Innovation durch eine simulierte Reise</p>
+
+                            </div>
+                            <div class="col-md-3">
+                                <h3 class="text-center"><strong>Ziel</strong></h3>
+                                <p class="trip-text-center">Wir wollen eine emotionale und verständnisvolle Bindung zu den Schülern aufbauen. </p>
+                                <p class="trip-text-center">Krönung ist die eigene Erlebnisreise in Form eines Filmes mit den Schüler in den Hauptrollen.</p>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="offset-md-1 col-md-3">
+                                <p> <img src="http://layout.project-dev.de/pix/theme/trip.png" class="rounded" style="width: 100%"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p> <img src="http://layout.project-dev.de/pix/theme/trip.png" class="rounded" style="width: 100%"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p> <img src="http://layout.project-dev.de/pix/theme/trip.png" class="rounded" style="width: 100%"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        folgt...
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        folgt...
+                    </div>
+                    <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
+                        folgt...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        -->
+

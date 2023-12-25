@@ -1,0 +1,257 @@
+
+<div class="row pb-3">
+    <div class="col-2">
+        <select class="class_selector_mails form-control" id="class_selector_mails">
+            <option></option>
+            {{{option_classes}}}
+        </select>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <h4>Buchenden</h4>
+    </div>
+</div>
+
+<input type="hidden" value="{{{b_id}}}" id="b_id" name="b_id">
+
+<form action="" method="get" id="codes">
+    <div class="row pb-3">
+        <div class="col-2">
+            Z-Codes
+        </div>
+        <div class="col-6">
+            <input type="submit" class="btn btn-primary" id="send_codes" value="senden"/>
+        </div>
+        <div class="col-1">
+            <span class="sent_codes_mail" style="color: green; display: none;">gesendet</span>
+        </div>
+    </div>
+</form>
+
+<form action="" method="get" id="reminder_form">
+    <div class="row pb-3">
+        <div class="col-2">
+            Erinnerung 1
+        </div>
+        <div class="col-6">
+            <input type="submit" class="btn btn-primary" id="send_reminder" value="senden"/>
+        </div>
+        <div class="col-1">
+            <span class="sent_reminder_mail" style="color: green; display: none;">gesendet</span>
+        </div>
+    </div>
+</form>
+
+<form action="" method="get" id="reminder_form2">
+    <div class="row pb-3">
+        <div class="col-2">
+            Erinnerung 2
+        </div>
+        <div class="col-6">
+            <input type="submit" class="btn btn-primary" id="send_reminder2" value="senden"/>
+        </div>
+        <div class="col-1">
+            <span class="sent_reminder_mail2" style="color: green; display: none;">gesendet</span>
+        </div>
+    </div>
+</form>
+
+
+
+<div class="row pt-5">
+    <div class="col-12">
+        <h4>Durchführenden</h4>
+    </div>
+</div>
+
+
+<form action="" method="get" id="motivation">
+    <div class="row pb-3">
+        <div class="col-2">
+            Vorbereitung
+        </div>
+        <div class="col-6">
+            <input type="submit" class="btn btn-primary" id="send" value="senden"/>
+        </div>
+        <div class="col-1">
+            <span class="sent_mail" style="color: green; display: none;">gesendet</span>
+        </div>
+    </div>
+</form>
+
+<form action="" method="get" id="film">
+    <div class="row">
+        <div class="col-2">
+            {{#film_type}}
+                Abgleichmail (Ausreichend)
+            {{/film_type}}
+            {{^film_type}}
+            Abgleichmail (Nicht Ausreichend)
+            {{/film_type}}
+
+
+        </div>
+        <div class="col-6">
+            {{#film_btn}}
+                <input type="submit" class="btn btn-primary" id="send_finishing" value="senden">
+            {{/film_btn}}
+            {{^film_btn}}
+                <input type="submit" class="btn btn-primary" id="send_finishing" value="senden" disabled>
+            {{/film_btn}}
+
+        </div>
+        <div class="col-1">
+            <span class="sent_film_mail" style="color: green; display: none;">gesendet</span>
+        </div>
+    </div>
+</form>
+
+{{#js}}
+
+    $(document).ready(function () {
+
+    $('#codes').submit(function (evt) {
+
+
+    if($( "#class_selector_mails").val() === ''){
+    evt.preventDefault();
+    alert('Erst Klasse wählen');
+    }else{
+
+            evt.preventDefault();
+            var b_id = $( "#b_id" ).val();
+            var user = $( "#class_selector_mails").val();
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "../includes/emails/codes.php?b_id="+b_id+"&user="+user, true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.onreadystatechange = function() {
+
+            if (this.readyState == 4 && this.status == 200) {
+
+            // Response
+            $( ".sent_codes_mail" ).show();
+
+            }
+            };
+            xhttp.send();
+    }
+        
+    });
+
+    $('#reminder_form').submit(function (evt) {
+
+    if($( "#class_selector_mails").val() === ''){
+    evt.preventDefault();
+    alert('Erst Klasse wählen');
+    }else{
+
+        evt.preventDefault();
+        var b_id = $( "#b_id" ).val();
+        var user = $( "#class_selector_mails").val();
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "../includes/emails/reminder1.php?b_id="+b_id+"&user="+user, true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+
+            // Response
+            $( ".sent_reminder_mail" ).show();
+
+        }
+        };
+        xhttp.send();
+    }
+    });
+
+    $('#reminder_form2').submit(function (evt) {
+
+    if($( "#class_selector_mails").val() === ''){
+    evt.preventDefault();
+    alert('Erst Klasse wählen');
+    }else{
+
+    evt.preventDefault();
+    var b_id = $( "#b_id" ).val();
+    var user = $( "#class_selector_mails").val();
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "../includes/emails/reminder2.php?b_id="+b_id+"&user="+user, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+
+    if (this.readyState == 4 && this.status == 200) {
+
+    // Response
+    $( ".sent_reminder_mail2" ).show();
+
+    }
+    };
+    xhttp.send();
+    }
+    });
+
+    $('#motivation').submit(function (evt) {
+
+    if($( "#class_selector_mails").val() === ''){
+        evt.preventDefault();
+        alert('Erst Klasse wählen');
+    }else{
+
+        evt.preventDefault();
+        var b_id = $( "#b_id" ).val();
+        var user = $( "#class_selector_mails").val();
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "../includes/emails/motivation.php?b_id="+b_id+"&user="+user, true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+
+            // Response
+            $( ".sent_mail" ).show();
+
+        }
+        };
+             xhttp.send();
+        }
+    });
+
+    $('#film').submit(function (evt) {
+
+    if($( "#class_selector_mails").val() === ''){
+    evt.preventDefault();
+    alert('Erst Klasse wählen');
+    }else{
+    evt.preventDefault();
+    var b_id = $( "#b_id" ).val();
+  
+    var user = $( "#class_selector_mails").val();
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "../includes/emails/film.php?b_id="+b_id+"&user="+user, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+
+    if (this.readyState == 4 && this.status == 200) {
+
+    // Response
+    $( ".sent_film_mail" ).show();
+
+    }
+
+    };
+    xhttp.send();
+    }
+
+    });
+    });
+
+
+{{/js}}

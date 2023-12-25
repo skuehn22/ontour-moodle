@@ -1,0 +1,530 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    Page header.
+}}
+
+<style>
+    .container{
+        max-width: none!important;
+    }
+
+    .dropdown-content_account .submenu {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 190px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content_account .submenu-anlegen {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 190px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown_account:hover .submenu {
+        display: none;
+    }
+
+    .dropdown_account:hover .submenu-anlegen {
+        display: none;
+    }
+
+    .dropdown-content_account .submenu a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content_account .submenu-anlegen a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content_account .submenu a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown-content_account .submenu-anlegen a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown-content_account .submenu {
+        left: -100%; /* position the submenu to the left */
+        top: 0;
+    }
+
+    .dropdown-content_account .submenu-anlegen {
+        left: -100%; /* position the submenu to the left */
+        top: 0;
+    }
+
+    .last-menu:hover .submenu {
+        display: block;
+    }
+
+    .last-menu-anlegen:hover .submenu-anlegen {
+        display: block;
+    }
+
+    .submenu-anlegen {
+        position: absolute;
+        top: 0;
+        left: 100%; /* position the submenu to the right */
+    }
+</style>
+
+{{#data_modal}}
+<script src="js_custom/jquery-1.11.0.min.js"></script>
+{{/data_modal}}
+
+
+
+{{#company_modal}}
+    {{#show_modal}}
+    <script type="text/javascript">
+        $(window).load(function() {
+            $('#myModal_company').modal('show');
+        });
+    </script>
+    {{/show_modal}}
+{{/company_modal}}
+{{^company_modal}}
+
+    {{#show_modal}}
+    <script type="text/javascript">
+        $(window).load(function() {
+            $('#myModal').modal('show');
+        });
+    </script>
+    {{/show_modal}}
+{{/company_modal}}
+
+
+{{#show_modal}}
+
+   <script>
+       $(document).ready(function() {
+           prep_modal();
+       });
+
+       function prep_modal()
+       {
+           $(".modal").each(function() {
+
+               var element = this;
+               var pages = $(this).find('.modal-split');
+
+
+               if (pages.length != 0)
+               {
+                   pages.hide();
+                   pages.eq(0).show();
+
+
+                   var b_button = document.createElement("button");
+                   b_button.setAttribute("type","button");
+                   b_button.setAttribute("class","btn btn-primary");
+                   b_button.setAttribute("style","display: none; background-color: #fff!important; color: #ccc!important; width:50px; margin-right: 30px;");
+                   b_button.innerHTML = "Zurück";
+
+                   var n_button = document.createElement("button");
+                   n_button.setAttribute("type","button");
+                   n_button.setAttribute("class","btn btn-primary starten");
+                   n_button.innerHTML ="Starten";
+
+
+
+                   $(this).find('.modal-body').append(b_button).append(n_button);
+
+
+                   $('.cancel').click(function() {
+                       $(location).prop('href', 'https://reisen.ontour.org/zugangscode?code=true')
+                   });
+
+                   $('.last').click(function() {
+                       $( "#start_form" ).submit();
+                   });
+
+                   var page_track = 0;
+
+                   $(n_button).click(function() {
+
+                       const n_button = $(".starten");
+                       n_button.text("Weiter");
+
+                       pages.eq(0).show();
+
+                       //alert(page_track);
+
+                       this.blur();
+                       $(n_button).prop( "disabled", false );
+
+                       if(page_track != 0){
+                          // $('.modal-footer').hide();
+                       }
+
+
+
+                       if(page_track == 0)
+                       {
+                           $(b_button).show();
+                           $('.cancel').hide();
+                           var input = $('#className').val();
+
+                           if( input != "" ) {
+                               $(n_button).prop( "disabled", false );
+                           }else{
+                               $(n_button).prop( "disabled", true );
+                           }
+
+                       }
+
+                       if(page_track == 1)
+                       {
+                           $(b_button).show();
+
+                           var input = $('#school').val();
+
+                           if( input != "" ) {
+                               $(n_button).prop( "disabled", false );
+                           }else{
+                               $(n_button).prop( "disabled", true );
+                           }
+
+                       }
+
+                       if(page_track == 2)
+                       {
+                           $(b_button).show();
+
+                           var input = $('#school').val();
+
+                           if( input != "" ) {
+                               $(n_button).prop( "disabled", false );
+                           }else{
+                               $(n_button).prop( "disabled", true );
+                           }
+
+                       }
+
+                       if(page_track == 3)
+                       {
+
+                           $(b_button).show();
+
+                           {{#mailing_operator_no}}
+                               $(n_button).click();
+                           {{/mailing_operator_no}}
+
+                           {{#mailing}}
+                               var input = $('#email').val();
+
+                               if( input != "" ) {
+                                   $(n_button).prop( "disabled", false );
+                               }else{
+                                   $(n_button).prop( "disabled", true );
+                               }
+                           {{/mailing}}
+
+                       }
+
+                       if(page_track == pages.length-3)
+                       {
+
+                           $(b_button).show();
+
+                           var input = $('#firstname').val();
+
+                           if( input != "" ) {
+                               $(n_button).prop( "disabled", false );
+                           }else{
+                               $(n_button).prop( "disabled", true );
+                           }
+
+                       }
+
+                       if(page_track == pages.length-2)
+                       {
+                           $(n_button).text("Zum Videoprojekt");
+                           $(n_button).addClass( "last" );
+                           $(".last").prop( "disabled", true );
+                           checkBoxes()
+                       }else{
+                           $(n_button).removeClass( "last" );
+                       }
+
+                       if(page_track == pages.length-1)
+                       {
+                           $(element).find("form").submit();
+                       }
+
+                       if(page_track < pages.length-1)
+                       {
+                           page_track++;
+
+                           pages.hide();
+                           pages.eq(page_track).show();
+                       }
+
+
+                   });
+
+                   $(b_button).click(function() {
+
+                       //alert(page_track);
+
+                       $(n_button).prop( "disabled", false );
+
+                       if(page_track == 1)
+                       {
+                           $(b_button).hide();
+                       }
+
+                       if(page_track == 4)
+                       {
+                           {{#mailing_operator_no}}
+                               $(b_button).click();
+                           {{/mailing_operator_no}}
+                       }
+
+
+                       if(page_track == pages.length-1)
+                       {
+                           $(n_button).text("Next");
+                       }
+
+                       if(page_track > 0)
+                       {
+                           page_track--;
+
+                           pages.hide();
+                           pages.eq(page_track).show();
+                       }
+
+                   });
+               }
+
+               $('#AGB').change(function() {
+                   checkBoxes();
+               });
+
+               $('#data').change(function() {
+                   checkBoxes();
+               });
+
+               $('#className').on('input', function() {
+
+                   var input = $(this);
+                   if( input.val() != "" ) {
+                       $(n_button).prop( "disabled", false );
+                   }else{
+                       $(n_button).prop( "disabled", true );
+                   }
+
+               });
+
+               $('#school').on('input', function() {
+
+                   var input = $(this);
+                   if( input.val() != "" ) {
+                       $(n_button).prop( "disabled", false );
+                   }else{
+                       $(n_button).prop( "disabled", true );
+                   }
+
+               });
+
+               $('#email').on('input', function() {
+
+                   var input = $(this);
+                   if( input.val() != "" ) {
+                       $(n_button).prop( "disabled", false );
+                   }else{
+                       $(n_button).prop( "disabled", true );
+                   }
+
+               });
+
+               $('#firstname').on('input', function() {
+
+                   var input = $(this);
+                   if( input.val() != "" && $('#lastname').val() != "") {
+                       $(n_button).prop( "disabled", false );
+                   }else{
+                       $(n_button).prop( "disabled", true );
+                   }
+
+               });
+
+               $('#lastname').on('input', function() {
+
+                   var input = $(this);
+                   if( input.val() != "" && $('#firstname').val() != "") {
+                       $(n_button).prop( "disabled", false );
+                   }else{
+                       $(n_button).prop( "disabled", true );
+                   }
+
+               });
+
+
+           });
+       }
+
+
+
+       function checkBoxes(){
+
+           if($("#AGB").is(':checked')){
+               if($("#data").is(':checked')){
+                   $(".last").prop( "disabled", false );
+               }else{
+                   $(".last").prop( "disabled", true );
+               }
+
+           }else{
+               $(".last").prop( "disabled", true );
+           }
+
+       }
+
+   </script>
+{{/show_modal}}
+
+
+
+<!--
+{{#homepage}}
+    <nav class="navbar navbar-expand-lg navbar-light nav-top fixed-top">
+{{/homepage}}
+    {{^homepage}}
+    <nav class="navbar navbar-expand-lg navbar-light nav-top fixed-top bg-light">
+{{/homepage}}
+
+-->
+{{#admin}}
+
+    <nav class="navbar navbar-expand-lg navbar-light nav-top fixed-top bg-light">
+        <div class="container">
+
+
+        <div class="d-none d-sm-flex">
+            <a class="navbar-brand" href="https://ontour.org/">
+                <img src="/pix/theme/onTour.png">
+            </a>
+        </div>
+
+            <div class="d-none d-sm-flex">
+                <div class="navbar_account" style="padding-right: 15px">
+                    <div class="dropdown_account">
+                        <button class="dropbtn">{{{username}}}
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content_account">
+                           <!-- <a href="https://ontour.org/wp-admin/edit.php?post_type=shop_order">Zu Wordpress</a>-->
+                           <!-- <a href="https://reisen.ontour.org/course/view.php?id=10">Event</a>-->
+                            <a href="https://ontour.org/wp-admin/edit.php?post_type=shop_coupon">Gutscheine</a>
+                            <div class="last-menu-anlegen">
+                                <a class="last-menu-anlegen">Buchung anlegen >></a>
+                                <div class="submenu-anlegen">
+                                    <a href="https://reisen.ontour.org/mod/bookings/view.php?id=172" class="last-menu" id="last-menu">Projekt anlegen</a>
+                                    <a href="https://reisen.ontour.org/mod/bookings/view.php?id=172&company" class="last-menu" id="last-menu">Event anlegen</a>
+                                </div>
+                            </div>
+                            <a href="https://reisen.ontour.org/mod/bookings/view.php?id=172&mailing=true" class="last-menu" id="last-menu">Buchungsübersicht</a>
+
+
+                            <div class="last-menu">
+                                <a class="last-menu">Produktseiten >></a>
+                                <div class="submenu">
+                                    <a href="https://reisen.ontour.org/course/view.php?id=8" class="last-menu" id="last-menu">Berlin Videoprojekt</a>
+                                    <a href="https://reisen.ontour.org/course/view.php?id=10" class="dropdown_account">Berlin Videoevent</a>
+                                    <a href="https://reisen.ontour.org/course/view.php?id=13" class="last-menu" id="last-menu">Hamburg Videoprojekt</a>
+                                    <a href="https://reisen.ontour.org/course/view.php?id=11" class="dropdown_account">Hamburg Videoevent</a>
+                                    <a href="https://reisen.ontour.org/course/view.php?id=14" class="last-menu" id="last-menu">München Videoprojekt</a>
+                                    <a href="https://reisen.ontour.org/course/view.php?id=12" class="dropdown_account">München Videoevent</a>
+                                </div>
+                            </div>
+
+
+                            <a href="https://reisen.ontour.org/mod/finishing/view.php?id=165">Klassen auswerten</a>
+                            <a href="https://app.ontour.org/login/e7d8b4e59099a99e9d088b172268e224">WebApp auswerten</a>
+                           <!-- <a href="https://reisen.ontour.org/mod/bookings/includes/booking.php?id=172&report=true" class="last-menu" id="last-menu">Buchung bearbeiten</a>-->
+
+                            <!--  <a href="https://ontour.org/wp-admin/admin.php?page=wc-order-export#segment=common" class="last-menu" id="last-menu">Export</a>-->
+                            <!--<a href="https://reisen.ontour.org/course/view.php?id=8" class="last-menu" id="last-menu">Zum Videoprojekt</a>-->
+                            <a href="https://reisen.ontour.org/admin/search.php" class="last-menu" id="last-menu">System</a>
+                            <a href="https://reisen.ontour.org/mod/dashboard/view.php?id=192" class="last-menu" id="last-menu">Dashboard</a>
+                            <a href="{{{logout_url}}}" class="last-menu" id="last-menu">Abmelden</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+{{/admin}}
+
+{{^admin}}
+    <nav class="navbar navbar-expand-lg navbar-light nav-top fixed-top bg-light">
+
+        <div class="container1" style="width: 100%!important;">
+            <div class="row p-5">
+                <div class="col-md-4" style="padding-top: 6px;">
+                    <strong>Kundenbereich {{typ}} {{city}}</strong>
+                </div>
+                <div class="col-md-4">
+
+                        <img src="/pix/theme/onTour.png">
+                   
+                </div>
+                <div class="col-md-4 text-right" style="padding-top: 7px;">
+                    <a href="{{{logout_url}}}" class="last-menu" id="last-menu" style="border: 1px solid #2e2e2e; border-radius: 8px; padding-left:15px;padding-right:15px; padding-top: 8px; padding-bottom: 8px;"><strong>Ausloggen</strong></a>
+                </div>
+            </div>
+
+        </div>
+
+    </nav>
+{{/admin}}
+
+ <div class="d-none d-sm-flex">
+     {{#company}}
+         <img class="header-img" src="https://ontour.org/wp-content/uploads/Videoevent-Titelbild.jpg">
+     {{/company}}
+     {{^company}}
+             <img class="header-img" src="https://ontour.org/wp-content/uploads/2021/12/Titelbild-onTour.jpg">
+     {{/company}}
+</div>
+
+ <div class="d-sm-none d-xl-none d-md-none d-lg-none">
+     {{#company}}
+         <img class="header-img" src="https://ontour.org/wp-content/uploads/Videoevent-Titelbild.jpg">
+     {{/company}}
+     {{^company}}
+         <img class="header-img" src="https://ontour.org/wp-content/uploads/2021/12/Titelbild-onTour.jpg">
+     {{/company}}
+</div>

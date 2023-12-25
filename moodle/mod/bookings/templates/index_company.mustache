@@ -1,0 +1,326 @@
+<div class="container">
+    <div class="content-section" style="width: 98%;">
+
+
+
+        <div class="row">
+            <div class="col-md-4 pl-0">
+                <br>
+                <h2 class="p-0">Event-Buchung anlegen</h2>
+            </div>
+            <div class="col-md-6 pl-0">
+                <br>
+                <!--<a href="https://ontour.org/wp-admin/edit.php?post_type=shop_order" class="btn btn-primary">Buchungsübersicht</a>-->
+            </div>
+        </div>
+
+        {{#report}}
+            <form action="./view.php?id=172&report=true" method="post">
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" id="search_id" name="search_id" placeholder="Buchungsnummer" class="form-control student-list" value="{{{order_id}}}">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="submit" class="btn btn-primary" id="filter-buid" value="Buchung suchen"/>
+                    </div>
+                </div>
+            </form>
+        {{/report}}
+
+
+        {{#b_id}}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <h5>Buchung angelegt!</h5> Buchungsnummer: <b>{{{b_id}}}</b><br><br>
+                        <p>  <u>Generierte Z-Codes</u> </p>
+
+                        {{{usernames}}}
+
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {{/b_id}}
+
+
+        {{#error}}
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <h5>{{error_msg}}</h5>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {{/error}}
+
+
+        <div class="row pt-5">
+            <div class="col-md-12">
+
+                <form id="booking" action="../bookings/includes/create_booking_company.php" method="post">
+                    <div class="form-group row">
+                        <label for="operator" class="col-sm-2 col-form-label"><b>Stadt <span style="color: red;">*</span></b></label>
+                        <div class="col-sm-2">
+                            <select id="city_product" name="city_product" class="form-control student-list" required>
+                                <option></option>
+                                <option value = "10">Berlin</option>
+                                <option value = "11">Hamburg</option>
+                                <option value = "12">München</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="operator" class="col-sm-2 col-form-label"><b>Kunde <span style="color: red;">*</span></b></label>
+                        <div class="col-sm-2">
+                            <select id="operators" name="operators" class="form-control student-list" required>
+                                <option></option>
+                                {{{o_select}}}
+                            </select>
+                            {{{mailing}}}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="operator_bid" class="col-sm-2 col-form-label"><b>Buchungsnummer Veranstalter <span style="color: red;">*</span></b></label>
+                        <div class="col-sm-2">
+                            <!--
+                            <input type="text" class="form-control student-list" id="operator_bid"  name="operator_bid" required value="{{{ext_booking_id}}}">
+                            -->
+                            <input type="text" class="form-control student-list" id="operator_bid"  name="operator_bid" required placeholder="Buchungsnummer Veranstalter">
+                        </div>
+                    </div>
+                    <div class="form-grouo row" style="padding-bottom: 15px;">
+                        <label for="email" class="col-sm-2 col-form-label"><b>Firmenname</b></label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control student-list" id="school" name="school"  placeholder="Firmenname">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="note" class="col-sm-2 col-form-label"><b>Bemerkung</b></label>
+                        <div class="col-sm-2">
+                            <textarea class="form-control  student-list" id="note" name="note" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="reminder" class="col-sm-2 col-form-label"><b>Datum Wiedervorlage</b></label>
+                        <div class="col-sm-2">
+                            <input type="date" class="form-control  student-list" id="reminder" name="reminder">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!--
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                      Minimieren
+                    </a>
+                    -->
+                    <div class="form-grouo row" style="padding-bottom: 15px;">
+                        <label for="email" class="col-sm-5 col-form-label" style="font-size: 20px;"><b>Buchender</b></label>
+                        <div class="col-sm-3">
+
+                        </div>
+                    </div>
+
+                    <div class="collapse show" id="collapseExample">
+                        <div class="card card-body" style="padding-left: 0px;">
+
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label"><b>Buchende Person</b></label>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control student-list" id="firstname" name="firstname" placeholder="Vorname">
+
+                                </div>
+                                <div class="col-sm-1">
+
+                                    <input type="text" class="form-control student-list" id="lastname" name="lastname"  placeholder="Nachname">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label"><b>E-Mail Adresse</b></label>
+                                <div class="col-sm-2">
+                                    <input type="email" class="form-control student-list" id="email" name="email" placeholder="E-Mail">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="checkbox" class="col-sm-2 col-form-label"><b>Buchender ist Veranstalter</b></label>
+                                <div class="col-sm-2">
+                                    <input type="checkbox" class="form-control student-list" id="book_for_operator" name="book_for_operator">
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group row" style="padding-bottom: 15px;">
+                                <label for="email" class="col-sm-5 col-form-label" style="font-size: 20px;"><b>Rechnungsadresse der Direktkunden</b></label>
+                                <div class="col-sm-2">
+
+                                </div>
+                            </div>
+                            <div class="form-grouo row" style="padding-bottom: 15px;">
+                                <label for="org" class="col-sm-2 col-form-label"><b>Organisation</b></label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control student-list" id="org" name="org"  placeholder="Organisation">
+                                </div>
+                            </div>
+                            <div class="form-grouo row" style="padding-bottom: 15px;">
+                                <label for="email" class="col-sm-2 col-form-label"><b>Straße</b></label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control student-list" id="street" name="street"  placeholder="Straße und Hausnummer">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label"><b>Ort</b></label>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control student-list" id="plz" name="plz" placeholder="PLZ">
+
+                                </div>
+                                <div class="col-sm-1">
+                                    <input type="text" class="form-control student-list" id="city" name="city"  placeholder="Stadt"">
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label"><b>Land</b></label>
+
+                                <div class="col-sm-2">
+                                    <select id="country" name="country" class="form-control student-list">
+                                        <option></option>
+                                        <option>Deutschland</option>
+                                        <option>Österreich</option>
+                                        <option>Schweiz</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group pt-3 pb-3">
+                        <hr>
+                        <input type="hidden" name="klasse1">
+                        <input type="hidden" name="klasse2">
+                        <input type="hidden" name="klasse3">
+                        <input type="hidden" name="klasse4">
+                        <input type="hidden" name="klasse5">
+                    </div>
+
+                    <div class="form-group row" style="padding-bottom: 15px;">
+                        <label for="email" class="col-sm-5 col-form-label" style="font-size: 20px;"><b>Durchführende</b></label>
+                        <div class="col-sm-3">
+
+                        </div>
+                    </div>
+
+                    <div class="v-code-generator">
+                        <div class="form-group row ">
+                            <label for="school_classes" class="col-sm-2 col-form-label"><b>Zugang anlegen</b></label>
+                            <div class="col-sm-3">
+                                <table class="table v-code-block" style="width: 300px!important">
+                                    <tbody>
+                                    <tr>
+                                        <td class="p-0 pb-3" style="border: none!important;">
+                                            <input type="text" style="width: 270px!important;" name="school_classes[]" class="form-control student-list klassenname0" value="Zugang 1"/>
+                                        </td>
+                                        <td class="col-sm-8 p-0 pl-2" style="border: none!important;">
+                                            <input type="button" class="btn btn-ontour"  id="addrow_company" value="+" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="p-0 pb-3" style="border: none!important;">
+                                            <input type="text" class="form-control student-list" id="arrival" min="date" name="arrival[]" placeholder="Anreise" onfocus="(this.type='date')" onfocusout="(this.type='text')" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="p-0 pb-3" style="border: none!important;">
+                                            <input type="text" class="form-control student-list" id="departure" name="departure[]" placeholder="Abreise" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="p-0 pb-3" style="border: none!important;">
+                                            <select id="students" name="students[]" class="form-control student-list">
+                                                <option value="">Anzahl Personen</option>
+                                                <option value="1 - 9 Personen">1 - 9 Personen</option>
+                                                <option value="10 - 18 Personen">10 - 18 Personen</option>
+                                                <option value="19 - 27 Personen">19 - 27 Personen</option>
+                                                <option value="28 - 36 Personen">28 - 36 Personen</option>
+                                                <option value="37 - 45 Personen">37 - 45 Personen</option>
+                                                <option value="46 - 54 Personen">46 - 54 Personen</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="display: none;">
+                                        <td colspan="2" class="p-0 pb-3" style="border: none!important;">
+                                            <select id="age" name="age[]" class="form-control student-list">
+                                                <option value="14 - 15 Jahre">14 - 15 Jahre</option>
+                                                <option value="15 - 16 Jahre">15 - 16 Jahre</option>
+                                                <option value="16 - 17 Jahre">16 - 17 Jahre</option>
+                                                <option value="17 - 18 Jahre">17 - 18 Jahre</option>
+                                                <option value="18 und älter">18 und älter</option>
+                                            </select>
+                                            <hr>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="p-0 pb-3" style="border: none!important;">
+                                            <input type="text" class="form-control student-list price_class" id="price[]" name="price[]" placeholder="Preis">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="p-0 pb-3" style="border: none!important;">
+                                            <textarea placeholder="Anmerkung" class="form-control  student-list" id="note_class[]" name="note_class[]" rows="3"></textarea>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="2" class="p-0 pb-3" style="border: none!important;">
+                                            <input type="text" class="form-control student-list" id="sp_vcode[]" name="sp_vcode[]" minlength="5" style="width:315px;" placeholder="Eigener Z-Code (optional)">
+                                            <hr>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="reminder" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="test-booking" name="test-booking">
+                                <label class="form-check-label" for="test-booking">
+                                    Als Testbuchung anlegen
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="reminder" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-3">
+                            <input type="submit" class="btn btn-primary" id="filter-buid" value="Buchung anlegen"/>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+{
+    "require": {
+        "transloadit/php-sdk": "^3.0",
+        "php-ffmpeg/php-ffmpeg": "^1.1"
+    }
+}

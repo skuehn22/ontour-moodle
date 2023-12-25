@@ -1,0 +1,77 @@
+/*
+* View notes page.
+*/
+#page-mod-notetaker-view .card {
+    border: 1px solid rgba(0, 0, 0, .125);
+    background-color: white;
+    border-radius: 3px;
+    word-wrap: break-word;
+}
+
+#page-mod-notetaker-view .card-title {
+    font-size: 1.171875rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+#page-mod-notetaker-view .card-thumbnail {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    display: flex;
+    width: 30%;
+    height: 0;
+    padding-top: calc(0.66 * 30%);
+    background-size: cover;
+    justify-content: center;
+}
+
+#page-mod-notetaker-view .extracount {
+    color: white;
+    align-self: center;
+    font-size: calc(1rem + (12 - 1) * ((100vw - 300px) / (2400 - 300)));
+    font-weight: 700;
+    margin-bottom: calc(0.66 * 90%);
+}
+
+#page-mod-notetaker-view .card-badge {
+    padding: .35em .5em;
+    font-size: 80%;
+}
+
+/* View notes search field */
+#page-mod-notetaker-view #note-search {
+    margin-top: 2.5em;
+}
+
+/* Make search button appear in a row */
+#page-mod-notetaker-view #fitem_id_submitbutton {
+    display: inline;
+}
+
+/* Resolve alignment */
+#page-mod-notetaker-view .fitem #id_submitbutton {
+    margin-top: 0;
+    margin-left: 15px;
+}
+
+/* Make search field appear in a row */
+#page-mod-notetaker-view #fitem_id_q {
+    display: inline;
+}
+
+/* Clear button */
+/* #page-mod-notetaker-view input.btn.btn-link {
+    color: black;
+} */
+
+#page-mod-notetaker-view #fitem_id_q > div.col-md-9.form-inline.felement {
+    max-width: 100%;
+    padding-right: 0;
+}
+
+@media (min-width: 768px) {
+
+    #page-mod-notetaker-view #fitem_id_q > div.col-md-9.form-inline.felement {
+        max-width: 100%;
+    }
+}

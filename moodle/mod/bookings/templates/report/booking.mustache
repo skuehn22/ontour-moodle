@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-4">
+
+        <table>
+            <tr>
+                <td><strong>Buchungsnummer:</strong></td>
+                <td colspan="2">{{{b_id}}}</td>
+            </tr>
+            <tr>
+                <td><strong>Ext. Buchungsnummer:</strong></td>
+                <td colspan="2">{{ext_b_id}}</td>
+            </tr>
+            <tr>
+                <td><strong>Zugangscodes:</strong></td>
+                <td colspan="2">{{{usernames}}}</td>
+            </tr>
+            <tr>
+                <td><strong>Schulname:</strong></td>
+                <td colspan="2">{{school}}</td>
+            </tr>
+            <tr>
+                <td><strong>Status:</strong></td>
+                <td colspan="2">{{state}}</td>
+            </tr>
+
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <form action="../includes/data/finshed.php" method="get">
+                        <br><br>
+                        <input type="hidden" name="b_id" value="{{b_id}}">
+                        <input type="submit" value="Abschließen" class="btn btn-success" style="border-radius: 6px; color: #fff;">
+                    </form>
+
+                </td>
+                <td>
+                    <form action="../includes/data/storno.php" method="get">
+                        <br><br>
+                        <input type="hidden" name="b_id" value="{{b_id}}">
+                        <input type="submit" value="Stornieren" class="btn btn-warning" style="border-radius: 6px; color: #fff;">
+                    </form>
+
+                </td>
+                <td>
+                    <form action="../includes/data/reopen_booking.php" method="get">
+                        <br><br>
+                        <input type="hidden" name="b_id" value="{{b_id}}">
+                        <input type="submit" value="Wieder öffnen" class="btn btn-primary" style="border-radius: 6px; color: #fff;">
+                    </form>
+
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+
+
+
+

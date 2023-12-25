@@ -1,0 +1,196 @@
+<p>
+    <span  style="font-size: 20px; color: #565E6B!important">Schritt 1: </span>
+
+    <a data-toggle="collapse" href="#studentlist" role="button" aria-expanded="false" aria-controls="studentlist" style="font-size: 20px; color: #565E6B!important">
+        Schüler eintragen
+    </a>
+<p>Tragen Sie hier alle Schüler ein, die an der Reise teilgenommen haben.</p>
+
+    {{#saved_students}}
+        <span class="student-container">
+            <i class="icon fa fa-check-square-o fa-fw student-check" style="color:#357a32; padding-left:10px; padding-right: 0px; margin:0px;"></i> (<span class="student-count">{{students_count}}</span> eingetragen)
+         </span>
+    {{/saved_students}}
+    {{^saved_students}}
+        <span style="display: none;" class="student-container">
+            <i class="icon fa fa-check-square-o fa-fw student-check" style="color:#357a32; padding-left:10px; padding-right: 0px; margin:0px;"></i> (<span class="student-count">{{students_count}}</span> eingetragen)
+         </span>
+    {{/saved_students}}
+
+</p>
+
+
+
+
+<div class="collapse show" id="studentlist">
+    <div class="card card-body p-0" >
+<form id="students">
+        <input type="hidden" name="course" id="course" value="{{courseid}}">
+        <input type="hidden" name="user" id="user" value="{{userid}}">
+        <table id="myTable" class=" table order-list" style="width: 500px!important">
+            <thead>
+            <tr>
+                <td class="p-0" style="border: none!important;">
+
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+
+            {{#students}}
+                <tr>
+                    <td class="p-0" style="border: none!important;">
+                        <input type="text" style="width: 220px!important;" name="name[{{id}}]" placeholder="Schülername" class="form-control" value="{{name}}"/>
+                    </td>
+                    <td class="col-sm-2" style="border: none!important;">
+                        <a type="button" class="ibtnDelList btn btn-md btn-danger remove-student" style="color: #fff;" data-id="{{id}}">x</a>
+                    </td>
+                </tr>
+            {{/students}}
+
+                <tr>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        <input type="text" style="width: 220px!important;" name="new_name[]" placeholder="Schülername" class="form-control" value=""/>
+                    </td>
+                    <td class="col-sm-2" style="border: none!important;">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-0 pb-3" style="border: none!important;">
+                        <input type="text" style="width: 220px!important;" name="new_name[]" placeholder="Schülername" class="form-control" value=""/>
+                    </td>
+                    <td class="col-sm-8 p-0 pl-2" style="border: none!important;">
+                        <input type="button" class="btn btn-outline-secondary"  id="addrow" value="+" /> Weiteren Schüler hinzufügen
+                    </td>
+                </tr>
+
+
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td class="p-0 pt-3" colspan="3" style="text-align: left; border: none!important;">
+                    <input type="button" class="btn btn-success" id="save" value="Schüler speichern" />
+                </td>
+            </tr>
+            <tr>
+            </tr>
+            </tfoot>
+        </table>
+</form>
+    </div>
+</div>
+
+{{#js}}
+    $(document).ready(function () {
+    var counter = 0;
+
+    $("#addrow").on("click", function () {
+    var newRow = $("<tr>");
+        var cols = "";
+
+        cols += '<td class="p-0 pb-3" style="border: none!important;"><input type="text" class="form-control" placeholder="Schülername" style="width: 220px!important; " name="new_name[]"/></td>';
+
+        cols += '<td class="p-0 pb-3 pl-2" style="border: none!important;"><input type="button" class="ibtnDel btn btn-md btn-danger "  value="x"></td>';
+        newRow.append(cols);
+        $("table.order-list").append(newRow);
+        counter++;
+        });
+
+
+        $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();
+        counter -= 1
+        });
+
+
+        $("table.order-list").on("click", ".remove-student", function (event) {
+            $(this).closest("tr").remove();
+            counter -= 1
+        });
+
+
+    });
+
+        function calculateRow(row) {
+        var price = +row.find('input[name^="price"]').val();
+
+        }
+
+        function calculateGrandTotal() {
+        var grandTotal = 0;
+        $("table.order-list").find('input[name^="price"]').each(function () {
+        grandTotal += +$(this).val();
+        });
+        $("#grandtotal").text(grandTotal.toFixed(2));
+        }
+
+        $('#save').click(function() {
+        saveUsers();
+        });
+
+        function saveUsers() {
+
+            var url = "/mod/finishing/save-students.php";
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#students").serialize(),
+            success: function(data)
+            {
+                $(".student-count").text(data);
+                console.log(data);
+
+                if(data>0){
+                    $(".student-container").show();
+                }else{
+                    $(".student-container").hide();
+                }
+
+
+                $("#studentlist").removeClass('show');
+            }
+            });
+
+        }
+
+        $("table.order-list").on("click", ".ibtnDelList", function (event) {
+            var id = $( this ).attr('data-id');
+            removeStudent(id);
+            $(this).closest("tr").hide();
+        });
+
+        function removeStudent(id) {
+
+        var user = $("#user").val();
+        var course = $("#course").val();
+
+        var url = "/mod/finishing/remove-student.php";
+
+        $.ajax({
+        type: "POST",
+        url: url,
+        data: {id: id, user : user, course : course},
+        success: function(data)
+        {
+            $(".student-count").text(data);
+
+            if(data>0){
+                $(".student-container").show();
+            }else{
+                $(".student-container").hide();
+            }
+
+            return true;
+        }
+        });
+
+        }
+
+
+
+
+{{/js}}

@@ -1,0 +1,49 @@
+# Ignore configuration files that may contain sensitive information
+/config.php
+
+# Ignore the Moodle data directory
+/moodledata/
+
+# Ignore files containing installed version info
+/version.php
+
+# Ignore cache files
+/cache/
+/localcache/
+
+# Ignore session files
+/sessions/
+
+# Ignore backup files
+*.backup
+*.bak
+*.old
+*.tmp
+
+# Ignore log files
+*.log
+
+# Ignore error files
+/error/
+
+# Ignore user files
+/user/
+
+# Ignore specific file extensions that are not needed
+*.swp
+*.swo
+
+# Ignore node modules if you're using any Node.js based tooling
+/node_modules/
+
+# Ignore specific directories that might contain personal or sensitive data
+/backup/
+/temp/
+/trashdir/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore PHP error logs
+php_errorlog

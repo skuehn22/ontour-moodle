@@ -1,0 +1,9 @@
+/test/config.php
+/Readme.html
+
+composer.lock
+composer.phar
+build/
+vendor/
+bin/composer
+env.sh

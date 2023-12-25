@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="content-section" style="width: 98%;">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="overview"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{#js}}
+
+
+    $( document ).ready(function() {
+
+    getOverview('{{groupid}}');
+
+    });
+
+
+
+
+
+    function getOverview(group){
+
+    var data = [];
+
+    var url = "/mod/finishing/includes/get-overview.php";
+
+    data['group'] = group;
+
+    $.ajax({
+    type: "POST",
+    url: url,
+    data: ({group: group}),
+    success: function(response)
+    {
+    if(response){
+    $(".overview").html(response);
+    }else{
+
+    }
+    }
+    });
+    }
+
+{{/js}}

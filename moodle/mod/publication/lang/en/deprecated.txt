@@ -1,0 +1,2 @@
+requiremodintro,mod_publication
+configrequiremodintro,mod_publication

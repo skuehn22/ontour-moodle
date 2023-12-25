@@ -1,0 +1,210 @@
+<style>
+    #commentTable {
+        table-layout: fixed;
+    }
+
+    .bnr_column {
+        width: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .date_column {
+        width: 75px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .vnr_column {
+        width: 55px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .filter-input {
+        max-width: 100%;
+        box-sizing: border-box; /* This makes sure padding and border are included in the width */
+    }
+</style>
+{{#success}}
+    <div class="row pt-5">
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Erfolgreich:</strong> {{success_msg}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+{{/success}}
+<div class="container">
+    <div class="content-section" style="width: 100%; padding:0px;">
+        <br>
+        <div>
+            <h2 style=" display: inline-block;">Buchungsverwaltung</h2> <div style=" display: inline-block; padding-left: 15px;"><a href="https://reisen.ontour.org/mod/bookings/view.php?id=172">Neue Buchung anlegen</a></div>
+        </div>
+
+        <br>
+        Ausblenden: <a class="toggle-vis" data-column="0">Notiz</a> - <a class="toggle-vis" data-column="1">W.Vorlage</a> - <a class="toggle-vis" data-column="2">Anreise</a> - <a class="toggle-vis" data-column="3">Abreise</a> - <a class="toggle-vis" data-column="4">VNR</a> - <a class="toggle-vis" data-column="5">Z-Code</a>
+        <br>
+    </div>
+    <ul>
+
+    </ul>
+    <div id="baseDateControl">
+        <div class="dateControlBlock pb-3">
+            Anreise in Zeitraum von: <input type="text" name="dateStart" id="dateStart" class="datepicker" size="8" />&nbsp;
+            <input type="text" name="dateEnd" id="dateEnd" class="datepicker" size="8"/>&nbsp;
+        </div>
+    </div>
+
+    <table id="commentTable" class="dataTablesTable" border="1" cellpadding="2" cellspacing="2" width="100%" style="font-size: 13px;">
+        <thead>
+        <tr id="theadRow">
+            <th class="bnr_column"><span>BNR</span></th>
+            <th><span>Kunde</span></th>
+            <th class="vnr_column"><span>VNR</span></th>
+            <th><span>Z-Code</span></th>
+            <th><span>Schulname</span></th>
+
+            <th class="date_column"><span>Anreise</span></th>
+            <th class="date_column"><span>Abreise</span></th>
+
+            <th><span>Status</span></th>
+
+
+            <th><span>Notiz</span></th>
+            <th class="date_column"><span>W.Vorlage</span></th>
+            <th><span>Action</span></th>
+            <th><span>Produkt</span></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {{#bookings}}
+            <tr>
+                <td >{{order_id}}</td>
+                <td >{{op}}</td>
+                <td >{{op_nr}}</td>
+                <td >{{code}}</td>
+                <td >{{school}}</td>
+                <td >{{arr}}</td>
+                <td >{{dep}}</td>
+                <td style="min-width: 150px;"> <span style="background-color: {{color}}; color: #fff; padding: 5px; border-radius: 6px;"> {{{state}}}</span> <p class="pt-1">{{{state_time}}}</p></td>
+                <td >
+                    {{note}}
+                    <a href="https://reisen.ontour.org/mod/bookings/includes/booking.php?id=172&report=true&search_id={{order_id}}&active_tab=2">
+                        <i class="icon fa fa-pencil fa-fw mail-pencil" title="Name ändern" aria-label="Name ändern" id="e_mail" style="color: #bbb; width:4px;"></i>
+                    </a>
+                </td>
+                <td >{{note_reminder}}</td>
+                <td  style="min-width: 150px;">
+                    <a href="/mod/bookings/includes/booking.php?id=172&report=true&search_id={{order_id}}" class="btn btn-primary"><i class="icon fa fa-pencil fa-fw mail-pencil" title="Name ändern" aria-label="Name ändern" id="e_mail" style="color: #fff; width:4px;"></i></a>
+                    <a class="btn btn-danger del-class" style="border-radius: 6px; background-color: #ca3120; border-color: #ca3120;"  data-bid="{{order_id}}" data-userid="{{user_id}}" data-toggle="modal" data-target="#exampleModal">
+                        <i class="icon fa fa-trash" title="Buchung löschen" aria-label="Name ändern" style="color: #fff; width:4px;"></i>
+                    </a>
+                    <a href="/mod/finishing/view.php?id=165&typ=direct&user={{user_id}}&overview=1" class="btn btn-warning" style="border-radius: 6px;"  data-bid="{{order_id}}" data-userid="{{user_id}}">
+                        <i class="icon fa fa-star" title="Abgaben einsehen" style="color: #fff; width:4px;"></i>
+                    </a>
+                </td>
+                <td >{{product}}</td>
+            </tr>
+        {{/bookings}}
+
+        </tbody>
+    </table>
+
+    <div id="endBlock"></div>
+
+
+</div>
+
+<!--
+<div class="row">
+    <div class="col-md-3" style="padding-left:30px;">
+        <br><br>
+        <h3>Buchungen 2023</h3>
+
+        {{#counter}}
+
+            <div class="row"><div class="col-2">Januar: </div><div class="col-4">{{Januar}}</div></div>
+            <div class="row"><div class="col-2">Februar: </div><div class="col-4">{{Februar}}</div></div>
+            <div class="row"><div class="col-2">März: </div><div class="col-4">{{März}}</div></div>
+            <div class="row"><div class="col-2">April: </div><div class="col-4">{{April}}</div></div>
+            <div class="row"><div class="col-2">Mai: </div><div class="col-4">{{Mai}}</div></div>
+            <div class="row"><div class="col-2">Juni: </div><div class="col-4">{{Juni}}</div></div>
+            <div class="row"><div class="col-2">Juli: </div><div class="col-4">{{Juli}}</div></div>
+            <div class="row"><div class="col-2">August: </div><div class="col-4">{{August}}</div></div>
+            <div class="row"><div class="col-2">September: </div><div class="col-4">{{September}}</div></div>
+            <div class="row"><div class="col-2">Oktober: </div><div class="col-4">{{Oktober}}</div></div>
+            <div class="row"><div class="col-2">November: </div><div class="col-4">{{November}}</div></div>
+            <div class="row"><div class="col-2">Dezember: </div><div class="col-4">{{Dezember}}</div></div>
+
+        {{/counter}}
+
+        <div class="row"><div class="col-2"><strong>Gesamt:</strong> </div><div class="col-4"><strong>{{gesamt}}</strong></div></div>
+        <div class="row"><div class="col-2"><strong>Umsatz (netto):</strong> </div><div class="col-4"><strong>{{umsatz}} EUR</strong></div></div>
+
+        <br><br>
+       <i>Frohe Weihnachten von Kai und Sebastian</i> <img src="https://www.publicdomainpictures.net/pictures/430000/velka/image-1638521540E2Z.png" style="width:30px;">
+
+    </div>
+    <div class="col-md-6">
+        <br><br>
+        <h3>Nach Veranstalter</h3>
+        {{#booking_op}}
+            <div class="row"><div class="col-2">Direkt: </div><div class="col-4">{{direkt}}</div></div>
+            <div class="row"><div class="col-2">WBT: </div><div class="col-4">{{WBT}}</div></div>
+            <div class="row"><div class="col-2">Alpetours: </div><div class="col-4">{{Alpetours}}</div></div>
+            <div class="row"><div class="col-2">Jugendtours: </div><div class="col-4">{{Jugendtours}}</div></div>
+            <div class="row"><div class="col-2">Herole: </div><div class="col-4">{{Herole}}</div></div>
+            <div class="row"><div class="col-2">CTS: </div><div class="col-4">{{CTS}}</div></div>
+            <div class="row"><div class="col-2">EVR: </div><div class="col-4">{{EVR}}</div></div>
+        {{/booking_op}}
+
+    </div>
+</div>
+-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buchung/Klasse löschen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Sicher, dass du die Buchung/Klasse <span class="class_span"></span> löschen möchtest?
+            </div>
+            <div class="modal-footer">
+                <form action="includes/data/delete_class.php" method="get">
+                    <input type="hidden" name="user_delete_id" id="user_delete_id" value="">
+                    <input type="hidden" name="bid_delete_id" id="bid_delete_id" value="{{b_id}}">
+                    <input type="hidden" name="overview_trigger" id="overview_trigger" value="1">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="delete_class_btn" class="btn btn-danger" style="border-radius: 6px;">Ja, löschen</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{{#js}}
+
+  
+
+    $(document).on('click', '.del-class', function() {
+    var userId = $(this).data('userid');  // Get data-userid value from clicked element
+    var bid = $(this).data('bid');        // Get data-bid value from clicked element
+
+    // Set the values in the modal's hidden inputs
+    $('#user_delete_id').val(userId);
+    $('#bid_delete_id').val(bid);
+
+    // Optionally, you can update any other elements in the modal as well, like text spans.
+    $('.class_span').text(bid); // For example.
+    });
+
+{{/js}}

@@ -1,0 +1,631 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_boost/columns2
+
+    Admin time setting template.
+
+    Boost 2 column layout template.
+
+    Context variables required for this template:
+    * sitename - The name of the site
+    * output - The core renderer for the page
+    * bodyattributes - attributes for the body tag as a string of html attributes
+    * sidepreblocks - HTML for the blocks
+    * hasblocks - true if there are blocks on this page
+    * navdraweropen - true if the nav drawer should be open on page load
+    * regionmainsettingsmenu - HTML for the region main settings menu
+    * hasregionmainsettingsmenu - There is a region main settings menu on this page.
+
+    Example context (json):
+    {
+        "sitename": "Moodle",
+        "output": {
+            "doctype": "<!DOCTYPE html>",
+            "page_title": "Test page",
+            "favicon": "favicon.ico",
+            "main_content": "<h1>Headings make html validators happier</h1>"
+         },
+        "bodyattributes":"",
+        "sidepreblocks": "<h2>Blocks html goes here</h2>",
+        "hasblocks":true,
+        "navdraweropen":true,
+        "regionmainsettingsmenu": "",
+        "hasregionmainsettingsmenu": false
+    }
+}}
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+
+<div id="page-wrapper">
+
+    {{{ output.standard_top_of_body_html }}}
+
+        {{#logged_in}}
+            {{>theme_klass/header_backend}}
+        {{/logged_in}}
+        {{^logged_in}}
+            {{>theme_klass/header}}
+        {{/logged_in}}
+
+
+    <div id="page" class="container container-full">
+        <div id="page-content" class="row">
+
+
+                <div id="region-main-box" class="col-12" style="padding-left: 0px;">
+
+
+                {{#hasregionmainsettingsmenu}}
+                <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
+                    <div> {{{ output.region_main_settings_menu }}} </div>
+                </div>
+                {{/hasregionmainsettingsmenu}}
+                <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}} aria-label="{{#str}}content{{/str}}"  style="padding-left: 0px;">
+                    {{#hasregionmainsettingsmenu}}
+                        <div class="region_main_settings_menu_proxy"></div>
+                    {{/hasregionmainsettingsmenu}}
+                    {{{ output.course_content_header }}}
+                    {{{ output.main_content }}}
+                    {{{ output.activity_navigation }}}
+                    {{{ output.course_content_footer }}}
+                </section>
+                {{#hasblocks}}
+                <section data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
+                    {{{ sidepreblocks }}}
+                </section>
+                {{/hasblocks}}
+            </div>
+        </div>
+    </div>
+    {{{ output.full_header }}}
+    {{> theme_boost/nav-drawer }}
+</div>
+
+
+
+{{#company_modal}}
+    <div class="modal fade start-modal" id="myModal_company" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content start-modal-content">
+
+
+                <div class="modal-body start-modal-body">
+
+                    <form method="post" id="start_form" action="https://reisen.ontour.org/course/view.php?id=10&section=6">
+
+                        <div class="modal-split">
+                            <h1>Herzlich Willkommen!</h1>
+                            <p>Wir haben noch ein paar Fragen an Sie. <br>Ein Teil der Antworten wird im Erinnerungsfilm erscheinen.</p>
+                            <!--<img src="https://ontour.org/wp-content/uploads/2022/03/In-Berlin-Videoprojekt-Startseite-onTour.webp" style="width: 300px;">-->
+                            <!--
+                            <div class="embed-responsive embed-responsive-16by9" style="width: 70%">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/gDeIQrP2MiY" allowfullscreen></iframe>
+                            </div>
+                            -->
+                        </div>
+
+                        <div class="modal-split">
+                            <h1>Bitte geben Sie den Firmennamen ein.</h1>
+                            <div class="form-group">
+                                <label for="className" class="label-class">Firmenname</label>
+                                <input type="text" class="form-control" id="className" name="className" aria-describedby="emailHelp" placeholder="Firmenname" style="width: 75%; display: initial;">
+                            </div>
+                        </div>
+
+                        <!--
+                        <div class="modal-split">
+                            <h1>Bitte geben Sie Ihren Firmennamen an</h1>
+                            <div class="form-group">
+                                <label for="school" class="label-class" style="padding-right: 261px;">Schulname</label>
+                                <input type="text" class="form-control" id="school" name="school" aria-describedby="emailHelp" placeholder="Schulname" style="width: 75%; display: initial;">
+                            </div>
+                        </div>
+                        -->
+
+
+                        {{#mailing}}
+                            <div class="modal-split">
+                                <h1>Bitte geben Sie Ihre E-Mail-Adresse an</h1>
+                                <p style="font-size: 13px; padding-top: 20px;">Sie koordinieren das Videoevent und bereiten alles vor? Dann geben Sie bitte hier Ihre
+                                    E-Mail-Adresse an. (Falls nicht, tragen Sie bitte die E-Mail-Adresse der zuständigen Person ein.)</p>
+                                <div class="form-group">
+                                    <label for="email" class="label-class" style="padding-right: 290px;">E-Mail</label>
+                                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="E-Mail" style="width: 75%; display: initial;">
+                                </div>
+                            </div>
+                        {{/mailing}}
+
+                        {{#mailing_operator_no}}
+                            <div class="modal-split" style="display: none;">
+                                <h1>Bitte geben Sie Ihre E-Mail-Adresse an</h1>
+                                <p style="font-size: 13px; padding-top: 20px;">Sie koordinieren das Videoevent und bereiten alles vor? Dann geben Sie bitte hier Ihre
+                                    E-Mail-Adresse an. (Falls nicht, tragen Sie bitte die E-Mail-Adresse der zuständigen Person ein.)</p>
+                                <div class="form-group">
+                                    <label for="email" class="label-class" style="padding-right: 290px;">E-Mail</label>
+                                    <input value="no" type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="E-Mail" style="width: 75%; display: initial;">
+                                </div>
+                            </div>
+                        {{/mailing_operator_no}}
+
+                        {{#mailing_operator}}
+                            <div class="modal-split">
+                                <h1>Bitte geben Sie Ihre E-Mail-Adresse an</h1>
+                                <p style="font-size: 13px; padding-top: 20px;">Sie koordinieren das Videoevent und bereiten alles vor? Dann geben Sie bitte hier Ihre
+                                    E-Mail-Adresse an. (Falls nicht, tragen Sie bitte die E-Mail-Adresse der zuständigen Person ein.)</p>
+                                <div class="form-group">
+                                    <label for="email" class="label-class" style="padding-right: 290px;">E-Mail (optional)</label>
+                                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="E-Mail" style="width: 75%; display: initial;">
+                                </div>
+                            </div>
+                        {{/mailing_operator}}
+
+                        <div class="modal-split">
+                            <h1>Geben Sie den Namen der zuständigen Person ein.</h1>
+                            <p>Wir würden Sie gerne mit Ihrem Namen ansprechen.</p>
+                            <div class="form-group">
+                                <label for="firstname" class="label-class">Vorname der zuständigen Person</label>
+                                <input type="email" class="form-control" id="firstname" name="firstname" placeholder="Vorname der zuständigen Person" style="width: 75%; display: initial;">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="label-class">Nachname der zuständigen Person</label>
+                                <input type="email" class="form-control" id="lastname" name="lastname" placeholder="Nachname der zuständigen Person" style="width: 75%; display: initial;">
+                            </div>
+                        </div>
+
+                        <div class="modal-split">
+                            <h1>Das war es schon</h1>
+                            <p style="font-size: 13px;">Wir wünschen Ihnen und Ihrem Team
+                                eine fantastische Zeit in Berlin!</p>
+                            <p style="font-size: 10px;">Bitte beachten Sie, dass Sie für die Durchführung des Videoevents das Einverständis aller Teilnehmer*innen brauchen.
+                                Eine Vorlage finden Sie in unserem Kundenbereich.</p>
+                            <div class="form-check" style="text-align: left;padding-left: 85px;">
+                                <input class="form-check-input" type="checkbox" value="" id="AGB" name="AGB">
+                                <label class="form-check-label" for="flexCheckDefault" style="font-size: 10px;">
+                                    Ich habe die <a href="#">AGB</a> und den <a href="#">Datenschutz</a> gelesen und stimme ihnen zu.
+                                </label>
+                            </div>
+                            <div class="form-check" style="text-align: left;padding-left: 85px;">
+                                <input class="form-check-input" type="checkbox" value="" id="data" name="data">
+                                <label class="form-check-label" for="flexCheckDefault" style="font-size: 10px;">
+                                    Ich hole die Einwilligung aller Teilnehmer ein.
+                                </label>
+                            </div>
+
+
+
+
+                            {{#newsletter}}
+                                <div class="form-check" style="text-align: left;padding-left: 85px;">
+                                    <input class="form-check-input" type="checkbox" value="" id="newsletter" name="newsletter">
+                                    <label class="form-check-label" for="flexCheckDefault" style="font-size: 10px;">
+                                        Bitte informieren Sie mich, zusätzlich zu den auftragsbezogenen Informationen,<br>auch über Neuigkeiten zum Videoprojekt Berlin.
+                                    </label>
+                                </div>
+                            {{/newsletter}}
+
+
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer" style="display: initial;">
+                    <a href="https://reisen.ontour.org/zugangscode?code=true" style="color: #aaa;">Vorgang abbrechen</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{{/company_modal}}
+{{^company_modal}}
+    <div class="modal fade start-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content start-modal-content">
+
+
+                <div class="modal-body start-modal-body">
+
+                    <form method="post" id="start_form" action="{{modal_link}}">
+
+                        <div class="modal-split">
+                            <h1>Herzlich Willkommen!</h1>
+                            <p style="color: #3c8d3c; padding-top: 10px;padding-bottom: 10px;">Ihr Zugangscode ist korrekt.</p>
+                            <img src="{{img_modal}}" style="width: 300px;   border-radius: 6px;">
+                            <!--
+                            <div class="embed-responsive embed-responsive-16by9" style="width: 70%">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/gDeIQrP2MiY" allowfullscreen></iframe>
+                            </div>
+                            -->
+                        </div>
+
+                        <div class="modal-split">
+                            <h1>Bitte geben Sie den Klassennamen an</h1>
+                            <div class="form-group">
+                                <label for="className" class="label-class">Klassenname (z.B. 9c)</label>
+                                <input type="text" class="form-control" id="className" name="className" aria-describedby="emailHelp" placeholder="Klassenname (z.B. 9c)" style="width: 75%; display: initial;">
+                            </div>
+                        </div>
+
+                        <div class="modal-split">
+                            <h1>Bitte geben Sie Ihren Schulnamen an</h1>
+                            <div class="form-group">
+                                <label for="school" class="label-class" style="padding-right: 261px;">Schulname</label>
+                                <input type="text" class="form-control" id="school" name="school" aria-describedby="emailHelp" placeholder="Schulname" style="width: 75%; display: initial;">
+                            </div>
+                        </div>
+
+                        <div class="modal-split">
+                            <h1>Bitte geben Sie das Durchschnittsalter <br>der Schüler*innen an</h1>
+                            <div class="form-group">
+                                <label for="age" class="label-class" style="padding-right: 79px;">Durchschnittsalter der Schüler*innen</label>
+                                <select id="age" name="age" class="form-control student-list" style="width: 75%; display: initial;">
+                                    <option value="">Alter Schüler_innen</option>
+                                    <option value="14 - 15 Jahre">14 - 15 Jahre</option>
+                                    <option value="15 - 16 Jahre">15 - 16 Jahre</option>
+                                    <option value="16 - 17 Jahre">16 - 17 Jahre</option>
+                                    <option value="17 - 18 Jahre">17 - 18 Jahre</option>
+                                    <option value="18 und älter">18 und älter</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+
+                        {{#mailing}}
+                            <div class="modal-split">
+                                <h1>Bitte geben Sie Ihre E-Mail-Adresse an</h1>
+                                <p style="font-size: 13px; padding-top: 20px;">Wir benötigen die E-Mailadresse der zuständigen Lehrkraft,<br>um auftragsrelevante (für das Videoprojekt) E-Mails verschicken zu können.</p>
+                                <div class="form-group">
+                                    <label for="email" class="label-class" style="padding-right: 218px;">E-Mail-Adresse</label>
+                                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" style="width: 75%; display: initial;">
+                                </div>
+                            </div>
+                        {{/mailing}}
+
+                        {{#mailing_operator_no}}
+                            <div class="modal-split" style="display: none;">
+                                <h1>Bitte geben Sie Ihre E-Mail-Adresse an</h1>
+                                <p style="font-size: 13px; padding-top: 20px;">Wir benötigen die E-Mailadresse der zuständigen Lehrkraft,<br>um auftragsrelevante (für das Videoprojekt) E-Mails verschicken zu können.</p>
+                                <div class="form-group">
+                                    <label for="email" class="label-class" style="padding-right: 290px;">E-Mail-Adresse</label>
+                                    <input value="no" type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" style="width: 75%; display: initial;">
+                                </div>
+                            </div>
+                        {{/mailing_operator_no}}
+
+                        {{#mailing_operator}}
+                            <div class="modal-split">
+                                <h1>Bitte geben Sie Ihre E-Mail-Adresse an</h1>
+                                <p style="font-size: 13px; padding-top: 20px;">Dies ist stark zu empfehlen, damit wir Ihnen im Support-Fall schnell helfen können. Wir nutzen diese E-Mail nicht für Werbung und löschen diese sofort nach Beendigung des Videoprojektes.</p>
+                                <div class="form-group">
+                                    <label for="email" class="label-class" style="padding-right: 290px;">E-Mail-Adresse (optional)</label>
+                                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" style="width: 75%; display: initial;">
+                                </div>
+                            </div>
+                        {{/mailing_operator}}
+
+                        <div class="modal-split">
+                            <h1>Bitte geben Sie Ihren Vor- und Nachnamen ein</h1>
+
+                            <div class="form-group">
+                                <label for="firstname" class="label-class" style="padding-right: 83px;">Vorname der zuständigen Lehrkraft</label>
+                                <input type="email" class="form-control" id="firstname" name="firstname" placeholder="Vorname der zuständigen Lehrkraft" style="width: 75%; display: initial;">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="label-class" style="padding-right: 78px;">Nachname der zuständigen Lehrkraft</label>
+                                <input type="email" class="form-control" id="lastname" name="lastname" placeholder="Nachname der zuständigen Lehrkraft" style="width: 75%; display: initial;">
+                            </div>
+                        </div>
+
+                        <div class="modal-split">
+                            <h1>Das war es schon</h1>
+                            <p style="font-size: 13px;">Wir wünschen Ihnen und Ihrer Klasse<br>eine fantastische Zeit!</p>
+                            <p style="font-size: 12px;">Bitte beachten Sie, dass Sie für die Durchführung des Videoprojektes <br> das Einverständnis Ihrer Schüler*innen und der Eltern benötigen.<br>Eine Vorlage dafür finden Sie in Ihrem Videoprojekt.</p>
+                            <div class="form-check" style="text-align: left;padding-left: 85px;">
+                                <input class="form-check-input" type="checkbox" value="" id="AGB" name="AGB">
+                                <label class="form-check-label" for="flexCheckDefault" style="font-size: 12px;">
+                                    Ich habe die <a href="#">AGBs</a> und den <a href="#">Datenschutz</a> gelesen <br>und stimme ihnen zu.
+                                </label>
+                            </div>
+                            <div class="form-check" style="text-align: left;padding-left: 85px;">
+                                <input class="form-check-input" type="checkbox" value="" id="data" name="data">
+                                <label class="form-check-label" for="flexCheckDefault" style="font-size: 12px;">
+                                    Ich hole die Einwilligung aller Teilnehmer ein.
+                                </label>
+                            </div>
+
+
+
+
+                            {{#newsletter}}
+                                <div class="form-check" style="text-align: left;padding-left: 85px;">
+                                    <input class="form-check-input" type="checkbox" value="" id="newsletter" name="newsletter">
+                                    <label class="form-check-label" for="flexCheckDefault" style="font-size: 10px;">
+                                        Bitte informieren Sie mich, zusätzlich zu den auftragsbezogenen Informationen,<br>auch über Neuigkeiten zum Videoprojekt.
+                                    </label>
+                                </div>
+                            {{/newsletter}}
+
+
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer" style="display: initial;">
+                    <a href="https://reisen.ontour.org/zugangscode?code=true" style="color: #aaa;">Vorgang abbrechen</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{{/company_modal}}
+
+
+
+<div class="modal" tabindex="-1" role="dialog" id="start-film">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Film-Produktion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Sind Sie sicher, dass Sie die Filmproduktion freigeben und starten wollen?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary freigeben">Freigeben</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="greetings_hidden" value="{{greetings}}">
+
+
+{{> theme_klass/footer }}
+
+{{#js}}
+
+$(document).ready(function () {
+var g = $("#greetings_hidden").val();
+$("#greetings").val(g);
+
+{{#names}}
+    var newRow = $("<tr>");
+        var cols = "";
+
+        cols += '<td class="p-0 pb-3" style="border: none!important;"><input type="text" class="form-control student-list" placeholder="Schülername" value=" {{name}}" style="width: 240px!important; " name="new_name[]"/></td>';
+
+        cols += '<td class="p-0 pb-3 pl-2" style="border: none!important;"><input type="button" class="ibtnDel btn btn-md btn-cross "  data-id="{{id}}" value="x"></td>';
+        newRow.append(cols);
+        $("table.order-list").append(newRow);
+        counter++;
+{{/names}}
+
+{{#names_lehrer}}
+        var newRow = $("<tr>");
+        var cols = "";
+
+        cols += '<td class="p-0 pb-3" style="border: none!important;"><input type="text" class="form-control lehrer-list" placeholder="Name der Begleitperson" value=" {{name}}" style="width: 240px!important; border-radius: 6px;" name="new_name_lehrer[]"/></td>';
+
+        cols += '<td class="p-0 pb-3 pl-2" style="border: none!important;"><input type="button" class="ibtnDel btn btn-md btn-cross "    data-id="{{id}}" value="x"></td>';
+        newRow.append(cols);
+        $("table.order-list-lehrer").append(newRow);
+        counter++;
+{{/names_lehrer}}
+
+
+    var counter = 0;
+    var counter_lehrer = 0;
+
+    $("#addrow").on("click", function () {
+        var newRow = $("<tr>");
+        var cols = "";
+
+        cols += '<td class="p-0 pb-3" style="border: none!important;"><input type="text" class="form-control student-list" placeholder="Name der Schüler*in" style="width: 240px!important; " name="new_name[]"/></td>';
+
+        cols += '<td class="p-0 pb-3 pl-2" style="border: none!important;"><input type="button" class="ibtnDel btn btn-md btn-cross "  value="x"></td>';
+        newRow.append(cols);
+        $("table.order-list").append(newRow);
+        counter++;
+    });
+
+
+    $("#addrow_lehrer").on("click", function () {
+        var newRow = $("<tr>");
+        var cols = "";
+
+        cols += '<td class="p-0 pb-3" style="border: none!important;"><input type="text" class="form-control student-list" placeholder="Name der Begleitperson" style="width: 240px!important; " name="new_name_lehrer[]"/></td>';
+
+        cols += '<td class="p-0 pb-3 pl-2" style="border: none!important;"><input type="button" class="ibtnDel btn btn-md btn-cross "  value="x"></td>';
+        newRow.append(cols);
+        $("table.order-list-lehrer").append(newRow);
+        counter_lehrer++;
+    });
+
+
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();
+        counter -= 1
+    });
+
+    $("table.order-list-lehrer").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();
+        counter_lehrer -= 1
+    });
+
+
+    $("table.order-list").on("click", ".remove-student", function (event) {
+        $(this).closest("tr").remove();
+        counter -= 1
+    });
+
+    $("table.order-list-lehrer").on("click", ".remove-student", function (event) {
+        $(this).closest("tr").remove();
+        counter_lehrer -= 1
+    });
+
+
+    });
+
+
+    $('#save').click(function() {
+        saveUsers();
+    });
+
+    function saveUsers() {
+        var url = "../../mod/finishing/save-students.php";
+
+        $.ajax({
+        type: "POST",
+        url: url,
+        data: $("#students").serialize(),
+        success: function(data)
+        {
+            $(".student-count").text(data);
+            console.log(data);
+
+            if(data>0){
+                $(".student-container").show();
+            }else{
+                $(".student-container").hide();
+            }
+        }
+    });
+
+    }
+
+
+    $('#save_lehrer').click(function() {
+
+        saveLehrer();
+    });
+
+    function saveLehrer() {
+    var url = "../../mod/finishing/save-lehrer.php";
+
+    $.ajax({
+    type: "POST",
+    url: url,
+    data: $("#lehrer").serialize(),
+    success: function(data)
+    {
+    $(".lehrer-count").text(data);
+    console.log(data);
+
+    if(data>0){
+    $(".lehrer-container").show();
+    }else{
+    $(".lehrer-container").hide();
+    }
+    }
+    });
+
+    }
+
+
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+    var id = $( this ).attr('data-id');
+    removeStudent(id);
+    $(this).closest("tr").hide();
+    });
+
+    function removeStudent(id) {
+
+    var user = $("#user").val();
+    var course = $("#course").val();
+
+    var url = "../../mod/finishing/remove-student.php";
+
+    $.ajax({
+    type: "POST",
+    url: url,
+    data: {id: id, user : user, course : course},
+    success: function(data)
+    {
+    $(".student-count").text(data);
+
+    if(data>0){
+    $(".student-container").show();
+    }else{
+    $(".student-container").hide();
+    }
+
+    return true;
+    }
+    });
+
+    }
+
+    $("table.order-list-lehrer").on("click", ".ibtnDel", function (event) {
+    var id = $( this ).attr('data-id');
+    removeLehrer(id);
+    $(this).closest("tr").hide();
+    });
+
+    function removeLehrer(id) {
+
+    var user = $("#user").val();
+    var course = $("#course").val();
+
+    var url = "../../mod/finishing/remove-lehrer.php";
+
+    $.ajax({
+    type: "POST",
+    url: url,
+    data: {id: id, user : user, course : course},
+    success: function(data)
+    {
+    $(".lehrer-count").text(data);
+
+    if(data>0){
+    $(".lehrer-container").show();
+    }else{
+    $(".lehrer-container").hide();
+    }
+
+    return true;
+    }
+    });
+
+    }
+
+    $('.production-form').click(function() {
+        $('#start-film').modal('show');
+    });
+
+    $('.freigeben').click(function() {
+        $('#pro-form').submit();
+    });
+
+
+    {{#production}}
+            $(".production_btn_deactivate").attr("disabled","disabled");
+            $(".production_btn_deactivate").show();
+            $(".production_btn").hide();
+    {{/production}}
+
+{{/js}}

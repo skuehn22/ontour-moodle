@@ -1,0 +1,143 @@
+<div class="container">
+    <div class="content-section" style="width: 98%;">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="p-0">Filtern</h2>
+                <form id="form_b_uid">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input id="b_uid" name="b_uid" type="text" class="form-control" placeholder="Buchungsnummer">
+                        </div>
+                        <input type="button" class="btn btn-primary" id="filter-buid" value="suchen"/>
+                    </div>
+                </form>
+                <form id="form_classes" style="display:none;">
+                    <div class="row">
+                        <div class="col-md-5 pt-3 classes"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2 class="p-0">WebApp</h2>
+                <form id="form_b_uid_webapp">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input id="b_uid_webapp" name="b_uid_webapp" type="text" class="form-control" placeholder="Buchungsnummer">
+                        </div>
+                        <input type="button" class="btn btn-primary" id="filter-buid-webapp" value="suchen"/>
+                    </div>
+                </form>
+
+                <form id="form_classes-webapp" style="display:none;">
+                    <div class="row">
+                        <div class="col-md-5 pt-3 classes-webapp"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row content-table pt-5" style="display:none;">
+        <div class="col-md-12">
+             <!-- Tabs navs -->
+            <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                <!--
+                <li class="nav-item" role="presentation">
+                    <a
+                            class="nav-link active"
+                            id="ex1-tab-1"
+                            data-mdb-toggle="tab"
+                            href="#ex1-tabs-1"
+                            role="tab"
+                            aria-controls="ex1-tabs-1"
+                            aria-selected="false"
+                    >Überblick</a
+                    >
+                </li>
+                -->
+                <li class="nav-item" role="presentation">
+                    <a
+                            class="nav-link active"
+                            id="ex1-tab-2"
+                            data-mdb-toggle="tab"
+                            href="#ex1-tabs-2"
+                            role="tab"
+                            aria-controls="ex1-tabs-2"
+                            aria-selected="true"
+                    >Auswertung</a
+                    >
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a
+                            class="nav-link"
+                            id="ex1-tab-3"
+                            data-mdb-toggle="tab"
+                            href="#ex1-tabs-3"
+                            role="tab"
+                            aria-controls="ex1-tabs-3"
+                            aria-selected="false"
+                    >Links</a
+                    >
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a
+                            class="nav-link"
+                            id="ex1-tab-4"
+                            data-mdb-toggle="tab"
+                            href="#ex1-tabs-4"
+                            role="tab"
+                            aria-controls="ex1-tabs-4"
+                            aria-selected="false"
+                    >Testbereich</a
+                    >
+                </li>
+            </ul>
+            <!-- Tabs navs -->
+
+            <!-- Tabs content -->
+            <div class="tab-content" id="ex1-content" style="padding:25px;">
+                <!--
+                <div
+                        class="tab-pane fade  show active"
+                        id="ex1-tabs-1"
+                        role="tabpanel"
+                        aria-labelledby="ex1-tab-1"
+                >
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="booking-info"></div>
+                        </div>
+                    </div>
+                </div>
+                -->
+                <div class="tab-pane fade show active" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="overview"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                    <div class="row">
+                        <div class="col-md-10 pt-3">
+                            <h3 style='font-size: 20px;'>Auswertungslinks</h3>
+                        </div>
+                        <div class="col-md-10 pt-3 links"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+                    <div class="row">
+                      Sebastian Testbereich
+                      <!--<a href="https://reisen.ontour.org/pluginfile.php/2968/assignsubmission_file/submission_files/707/cdv_photo_1657712978_20220713134936.jpg?forcedownload=1">Testlink</a>-->
+                      <div class="test-container"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tabs content -->
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="../finishing/assets/filter_booking5.js?v=1.3"></script>
+<script src="../finishing/assets/file_download.js?v=1.2"></script>

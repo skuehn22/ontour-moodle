@@ -1,0 +1,443 @@
+<style>
+
+    body, html {
+        height:100%;
+    }
+
+    /*
+     * Off Canvas sidebar at medium breakpoint
+     * --------------------------------------------------
+     */
+    @media screen and (max-width: 992px) {
+
+        .row-offcanvas {
+            position: relative;
+            -webkit-transition: all 0.25s ease-out;
+            -moz-transition: all 0.25s ease-out;
+            transition: all 0.25s ease-out;
+        }
+
+        .row-offcanvas-left
+        .sidebar-offcanvas {
+            left: -33%;
+        }
+
+        .row-offcanvas-left.active {
+            left: 33%;
+            margin-left: -6px;
+        }
+
+        .sidebar-offcanvas {
+            position: absolute;
+            top: 0;
+            width: 33%;
+            height: 100%;
+        }
+    }
+
+    /*
+     * Off Canvas wider at sm breakpoint
+     * --------------------------------------------------
+     */
+    @media screen and (max-width: 34em) {
+        .row-offcanvas-left
+        .sidebar-offcanvas {
+            left: -45%;
+        }
+
+        .row-offcanvas-left.active {
+            left: 45%;
+            margin-left: -6px;
+        }
+
+        .sidebar-offcanvas {
+            width: 45%;
+        }
+    }
+
+    .card {
+        overflow:hidden;
+        border-radius: 6px;
+        color: #000;
+    }
+
+    .card-body .rotate {
+        z-index: 8;
+        float: right;
+        height: 100%;
+    }
+
+    .card-body .rotate i {
+        color: rgba(20, 20, 20, 0.15);
+        position: absolute;
+        left: 0;
+        left: auto;
+        right: -10px;
+        bottom: 0;
+        display: block;
+        -webkit-transform: rotate(-44deg);
+        -moz-transform: rotate(-44deg);
+        -o-transform: rotate(-44deg);
+        -ms-transform: rotate(-44deg);
+        transform: rotate(-44deg);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 400;
+        font-family: Arial,Helvetica,sans-serif;
+        color: #000;
+    }
+
+    #region-main{
+        background-color: #ECF2FB;
+    }
+
+    .display-4 {
+        font-size: 1.5rem;
+
+        line-height: 1.2;
+        font-weight: 600;
+    }
+
+    .percent{
+        color: #49AEDB;
+    }
+
+    h6{
+        font-weight: 700;
+        font-size: 2.0em;
+    }
+
+
+    .progress-bar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        background-color: #49AEDB;
+        transition: width 0.6s ease;
+        border-radius: 6px;
+    }
+
+</style>
+
+<div class="row mb-3 pt-5">
+    <div class="col-xl-9 col-md-9 col-sm-9 col-9 py-2">
+        <div class="card h-100">
+            <div class="card-body ">
+                <div class="rotate">
+                    <i class="fa fa-user fa-4x"></i>
+                </div>
+                <h6 class="text-uppercase">Buchungen</h6>
+                <h1 class="display-4">{{gesamt}}</h1>
+                <p style=" color: #49AEDB;">Letzten Monat +  {{last_month}}</p>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{progress}}%" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100">{{progress}}%</div>
+                </div>
+                <p class="pt-2"><strong>Ziel 2023: 700 </strong></p>
+
+
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3"><b>Gesamt</b><br></div>
+                    <div class="col-3"><b>Stornierungen</b><br></div>
+                    <div class="col-3"><b>Bereinigt</b><br></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">Veranst.: </div>
+                    <div class="col-3">{{ops}} <span class="percent">({{percent_ops}}%)</span></div>
+                    <div class="col-3">{{storno_ext}} <span class="percent">({{storno_percent}}%)</span></div>
+                    <div class="col-3">{{bereinigt_ext}} <span class="percent">({{bereinigt_ext_percent}}%)</span></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">Direkt: </div>
+                    <div class="col-3">{{direct}} <span class="percent">({{percent_direct}}%)</span></div>
+                    <div class="col-3">{{storno_intern}} <span class="percent">(0%)</span></div>
+                    <div class="col-3">{{bereinigt_intern}} <span class="percent">({{bereinigt_intern_percent}}%)</span></div>
+                </div><br>
+
+                <div class="row">
+                    <div class="col-3"><b>2023</b></div>
+                    <div class="col-3"></div>
+                    <div class="col-3"></div>
+                    <div class="col-3"></div>
+                </div><br>
+
+
+                {{#counter}}
+
+                    <div class="row">
+                        <div class="col-3">Januar: </div>
+                        <div class="col-3">{{JanuarAll}}</div>
+
+                        <div class="col-3">{{JanuarStorno}} ({{JanuarStornoP}}%)</div>
+                        <div class="col-3">{{Januar}}</div>
+                    </div>
+
+                        <div class="row">
+                            <div class="col-3">Februar: </div>
+                            <div class="col-3">{{FebruarAll}}</div>
+
+                            <div class="col-3">{{FebruarStorno}} ({{FebruarStornoP}}%)</div>
+                            <div class="col-3">{{Februar}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">März: </div>
+                            <div class="col-3">{{MärzAll}}</div>
+
+                            <div class="col-3">{{MärzStorno}} ({{MärzStornoP}}%)</div>
+                            <div class="col-3">{{März}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">April: </div>
+                            <div class="col-3">{{AprilAll}}</div>
+
+                            <div class="col-3">{{AprilStorno}} ({{AprilStornoP}}%)</div>
+                            <div class="col-3">{{April}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">Mai: </div>
+                            <div class="col-3">{{MaiAll}}</div>
+
+                            <div class="col-3">{{MaiStorno}} ({{MaiStornoP}}%)</div>
+                            <div class="col-3">{{Mai}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">Juni: </div>
+                            <div class="col-3">{{JuniAll}}</div>
+
+                            <div class="col-3">{{JuniStorno}} ({{JuniStornoP}}%)</div>
+                            <div class="col-3">{{Juni}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">Juli: </div>
+                            <div class="col-3">{{JuliAll}}</div>
+
+                            <div class="col-3">{{JuliStorno}} ({{JuliStornoP}}%)</div>
+                            <div class="col-3">{{Juli}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">August: </div>
+                            <div class="col-3">{{AugustAll}}</div>
+
+                            <div class="col-3">{{AugustStorno}} ({{AugustStornoP}}%)</div>
+                            <div class="col-3">{{August}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">September: </div>
+                            <div class="col-3">{{SeptemberAll}}</div>
+
+                            <div class="col-3">{{SeptemberStorno}} ({{SeptemberStornoP}}%)</div>
+                            <div class="col-3">{{September}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">Oktober: </div>
+                            <div class="col-3">{{OktoberAll}}</div>
+
+                            <div class="col-3">{{OktoberStorno}} ({{OktoberStornoP}}%)</div>
+                            <div class="col-3">{{Oktober}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">November: </div>
+                            <div class="col-3">{{NovemberAll}}</div>
+
+                            <div class="col-3">{{NovemberStorno}} ({{NovemberStornoP}}%)</div>
+                            <div class="col-3">{{November}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">Dezember: </div>
+                            <div class="col-3">{{DezemberAll}}</div>
+
+                            <div class="col-3">{{DezemberStorno}} ({{DezemberStornoP}}%)</div>
+
+                            <div class="col-3">{{Dezember}}</div>
+                        </div>
+                {{/counter}}
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-9 col-md-9 col-sm-9 col-9 py-2">
+        <div class="card h-100">
+            <div class="card-body ">
+                <div class="rotate">
+                    <i class="fa fa-list fa-4x"></i>
+                </div>
+                <h6 class="text-uppercase">Umsatz</h6>
+                <h1 class="display-4">{{umsatz}} EUR</h1>
+                <p style=" color: #49AEDB;">Letzten Monat +  {{last_revenue}}</p>
+
+                {{#booking_op}}
+                    <div class="row pb-3">
+                        <div class="col-2"></div>
+                        <div class="col-2 text-center"><b>Anzahl der Buchungen</b></div>
+                        <div class="col-3 text-right"><b>Verkaufspreis</b></div>
+                        <div class="col-3 text-right"><b>Provisionszahlungen</b></div>
+                        <div class="col-2 text-right"><b>Umsatz</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">Direkt:</div>
+                        <div class="col-2 text-center">{{direkt}}</div>
+                        <div class="col-3 text-right">{{rev_direkt}} €</div>
+                        <div class="col-3 text-right">{{pro_direkt}} €</div>
+                        <div class="col-2 text-right">{{rev_direkt}} €</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">WBT: </div>
+                        <div class="col-2 text-center">{{WBT}}</div>
+                        <div class="col-3 text-right">{{rev_WBT}} €</div>
+                        <div class="col-3 text-right">{{pro_WBT}} €</div>
+                        <div class="col-2 text-right">{{gewinn_WBT}} €</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">CTS: </div>
+                        <div class="col-2 text-center">{{CTS}}</div>
+                        <div class="col-3 text-right">{{rev_CTS}} €</div>
+                        <div class="col-3 text-right">{{pro_CTS}} €</div>
+                        <div class="col-2 text-right">{{gewinn_CTS}} €</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">Herole: </div>
+                        <div class="col-2 text-center">{{Herole}}</div>
+                        <div class="col-3 text-right">{{rev_Herole}} €</div>
+                        <div class="col-3 text-right">{{pro_Herole}} €</div>
+                        <div class="col-2 text-right">{{gewinn_Herole}} €</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">Alpetours: </div>
+                        <div class="col-2 text-center">{{Alpetours}}</div>
+                        <div class="col-3 text-right">{{rev_Alpetours}} €</div>
+                        <div class="col-3 text-right">{{pro_Alpetours}} €</div>
+                        <div class="col-2 text-right">{{gewinn_Alpetours}} €</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">Klüspieß: </div>
+                        <div class="col-2 text-center">{{KS}}</div>
+                        <div class="col-3 text-right">{{rev_KS}} €</div>
+                        <div class="col-3 text-right">{{pro_KS}} €</div>
+                        <div class="col-2 text-right">{{gewinn_KS}} €</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">EVR: </div>
+                        <div class="col-2 text-center">{{EVR}}</div>
+                        <div class="col-3 text-right">{{rev_EVR}} €</div>
+                        <div class="col-3 text-right">{{pro_EVR}} €</div>
+                        <div class="col-2 text-right">{{gewinn_EVR}} €</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">Jugendtours: </div>
+                        <div class="col-2 text-center">{{Jugendtours}}</div>
+                        <div class="col-3 text-right">{{rev_Jugendtours}} €</div>
+                        <div class="col-3 text-right">{{pro_Jugendtours}} €</div>
+                        <div class="col-2 text-right">{{gewinn_Jugendtours}} €</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">Welcome to Berlin: </div>
+                        <div class="col-2 text-center">{{WTB}}</div>
+                        <div class="col-3 text-right">{{rev_WTB}} €</div>
+                        <div class="col-3 text-right">{{pro_WTB}} €</div>
+                        <div class="col-2 text-right">{{gewinn_WTB}} €</div>
+                    </div>
+
+                    <div class="row pt-3" style="font-weight: 700">
+                        <div class="col-2">Gesamt: </div>
+                        <div class="col-2 text-center">{{gesamt}}</div>
+                        <div class="col-3 text-right">{{umsatz}} €</div>
+                        <div class="col-3 text-right">{{pro_gesamt}} €</div>
+                        <div class="col-2 text-right">{{gewinn}} €</div>
+                    </div>
+                {{/booking_op}}
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row mb-3 pt-1 ml-0">
+    <div class="col-xl-5 col-md-5 col-sm-5 col-5 py-2">
+        <div class="card h-100">
+            <div class="card-body ">
+                <div class="rotate">
+                    <i class="fa fa-list fa-4x"></i>
+                </div>
+                <h6 class="text-uppercase">Schulen</h6>
+                <h1 class="display-4">{{schulen}}</h1>
+                <p style=" color: #49AEDB;">Keine PLZ hinterlegt: {{missing_code}}</p>
+
+                <!--
+                {{#missing_arr}}
+
+                    {{.}}
+                {{/missing_arr}}
+                        -->
+                <div class="row pb-3">
+                    <div class="col-3"><b>Bundesland</b></div>
+                    <div class="col-2 text-center"><b>Anzahl</b></div>
+                </div>
+
+                {{#bundesland}}
+                 <div class="row">
+                     <div class="col-3">{{key}}</div>
+                     <div class="col-2 text-center">{{value}}</div>
+                 </div>
+
+                {{/bundesland}}
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-4 col-sm-4 col-4 py-2">
+        <div class="card  h-100">
+            <div class="card-body ">
+                <div class="rotate">
+                    <i class="fa fa-twitter fa-4x"></i>
+                </div>
+                <h6 class="text-uppercase">Schüler</h6>
+                <h1 class="display-4">ca. {{schuler}}</h1>
+
+                {{#age}}
+                    <div class="row"><div class="col-7">18 und älter: </div><div class="col-2">{{alt4}}</div></div>
+                    <div class="row"><div class="col-7">17 - 18 Jahre: </div><div class="col-2">{{alt3}}</div></div>
+                    <div class="row"><div class="col-7">16 - 17 Jahre: </div><div class="col-2">{{alt2}}</div></div>
+                    <div class="row"><div class="col-7">15 - 16 Jahre: </div><div class="col-2">{{alt1}}</div></div>
+                    <div class="row"><div class="col-7">14 - 15 Jahre: </div><div class="col-2">{{alt0}}</div></div>
+                    <div class="row"><div class="col-7">Keine Angabe: </div><div class="col-2">{{not}}</div></div>
+
+                {{/age}}
+                {{test}}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row mb-3 pt-1 ml-0">
+    <div class="col-xl-9 col-md-9 col-sm-9 col-9 py-2">
+        <div class="card  h-100">
+            <div class="card-body ">
+                <div class="rotate">
+                    <i class="fa fa-twitter fa-4x"></i>
+                </div>
+                <h6 class="text-uppercase">AKTUELLE Feedbacks</h6>
+                <p><b>Die letzten 10 Feedbacks der Schüler*innen</b></p>
+                {{#feedback}}
+                    <div class="row pb-3">
+                        <div class="col-12"><span class="pr-4">{{key}}</span> {{value}}</div>
+                    </div>
+                {{/feedback}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+
+/* Set red background to h5p question */
+
+.h5p-interactive-video .h5p-splash:focus, .h5p-interactive-video .h5p-splash {
+    background-color: transparent!important;
+}
+
+
+.h5p-interactive-video .h5p-splash {
+    width: 20%;
+    margin: auto;
+    text-align: center;
+    background-color: transparent!important;
+    color: #12ABD4;
+    cursor: pointer;
+    -webkit-transition: background 0.2s ease-in;
+    transition: background 0.2s ease-in;
+}
+
+.h5p-interactive-video .h5p-splash-wrapper.no-description .h5p-splash-play-icon, .h5p-interactive-video .h5p-splash-wrapper.no-description.no-title .h5p-splash-play-icon {
+    padding: 0.5em 0;
+    font-size: 2em;
+
+}
+
+.h5p-interactive-video .h5p-interaction-inner
+
+.tech-slideshow {
+    height: 200px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+}
+
+.tech-slideshow>td {
+    height: 200px;
+    width: 256px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translate3d(0, 0, 0);
+}
+
+.tech-slideshow .mover-1 {
+    animation: moveSlideshow 5s linear infinite;
+}
+
+@keyframes moveSlideshow {
+    100% {
+        transform: translateX(-66.6666%);
+    }
+}
+
+table{
+    color: #fff;
+    overflow: hidden;
+}
+
+table.scrollable-content tbody tr{
+    overflow:auto;
+    display:block;
+    height:50px;
+    width:300px;
+    color: #fff;
+}
+table.scrollable-content tbody tr div{
+    animation-name: example;
+    animation-duration: 25s;
+}
+table.scrollable-content tbody tr:hover div{
+    animation-name: example2;
+    animation-duration: 25s;
+}
+
+@keyframes example {
+    from {}
+    to {
+
+        transform:translateY(-500px)
+    }
+}
+
+@keyframes hovered {
+    from {background-color: rgba(250,0,0,0.5);}
+    to {
+        background-color: rgba(250,250,0,0.5);
+        transform:translateY(-500px)
+    }
+}
+
+table.scrollable-content tbody tr {
+    overflow: hidden;
+}

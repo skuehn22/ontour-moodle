@@ -1,0 +1,107 @@
+<hr>
+<p clas="pt-5">
+    <span  style="font-size: 20px; color: #565E6B!important">Schritt 2: </span>
+
+
+    {{#saved_students}}
+        <a data-toggle="collapse" href="#deactivate-section" role="button" aria-expanded="false" aria-controls="deactivate-section"  style="font-size: 20px; color: #565E6B!important">
+            Reise abschließen
+        </a>
+    {{/saved_students}}
+    {{^saved_students}}
+        <a data-toggle="collapse" href="#deactivate-section" role="button" aria-expanded="false" aria-controls="deactivate-section" disabled="disabled"  style="font-size: 20px; color: #565E6B!important">
+            Reise abschließen
+        </a>
+    {{/saved_students}}
+
+</p>
+
+
+<div class="collapse show" id="deactivate-section">
+    <div class="card card-body p-0">
+    <h3  class="p-0">Ihre Reise wird abgeschlossen</h3>
+    <ul>
+        <li>Sie erhalten die Rechnung per E-Mail</li>
+        <li>Die Schüler Accounts werden deaktiviert</li>
+        <li>Die Reise wird abgeschlossen und deaktiviert</li>
+    </ul>
+
+    {{#school_classes}}
+        <p class="p-0">
+            <a class="btn btn-outline-secondary end-trip"  style="" data-group="{{id}}">Jetzt beenden{{name}}</a>
+        </p>
+    {{/school_classes}}
+
+    </div>
+</div>
+
+
+<div class="modal" id="sure" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sind Sie sich sicher?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <form id="data">
+                        <input type="hidden" name="course" value="{{courseid}}">
+                        <input type="hidden" name="user" value="{{userid}}">
+                        <input type="hidden" name="school_class" id="school_class" value="">
+                    </form>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary final-action">Beenden</button>
+                <button type="button" class="btn btn-secondary abort" data-dismiss="modal">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{#js}}
+
+    $(document).ready(function () {
+
+        $('.end-trip').click(function() {
+            var group = $(this).attr('data-group');
+            $("#school_class").val(group),
+            $("#sure").show();
+        });
+
+        $('.final-action').click(function() {
+            finalActions();
+        });
+
+        $('.close').click(function() {
+            $("#sure").hide();
+        });
+
+        $('.abort').click(function() {
+            $("#sure").hide();
+        });
+
+
+        function finalActions(){
+
+            url = "/mod/finishing/final-actions.php";
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#data").serialize(),
+            success: function(data)
+            {
+                $("#sure").hide();
+            }
+            });
+
+        }
+    });
+
+{{/js}}
+
