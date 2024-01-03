@@ -48,4 +48,8 @@ Thumbs.db
 # Ignore PHP error logs
 php_errorlog
 
+/moodle/filemanager/
 moodle/filemanager/
+moodle/videodateien
+/moodle/videodateien
+
